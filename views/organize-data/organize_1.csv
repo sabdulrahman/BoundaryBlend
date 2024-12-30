@@ -1,0 +1,478 @@
+Label,docId,Value,organize
+Sprint,"se1,fbi17,fbi11",7,Sprint
+US Post Office,fbi9,7,US Post Office
+Intelligence Agency,"fbi8,fbi11,cia4",7,INS
+Bush Intercontinental Airport,fbi8,7,Bush Intercontinental Airport
+Continental Airlines,fbi8,7,Continental Airlines
+Reagan National Airport,fbi8,7,Reagan National Airport
+The Powhatan Company,fbi7,7,The Powhatan Company
+Pentagon,fbi6,7,Pentagon
+Home Depot,fbi6,7,Home Depot
+American Airlines,"fbi5,fbi14,cia1",7,American Airlines
+Border Patrol,fbi5,7,Border Patrol
+University of Texas,fbi5,7,University of Texas
+Apex Paper,fbi4,7,Apex Paper Products Company
+Aryan Nations,fbi4,7,Aryan Nations
+Army CID,fbi4,7,Army CID
+Ryder Truck Rental,fbi3,7,Ryder Truck Rental
+Budget Storage Units,"fbi24,fbi20",7,Budget Storage Units
+Beth Israel,fbi23,7,Beth Israel
+Coast Guard,fbi21,7,Coast Guard
+Passport Agency,fbi2,7,Passport Agency
+AMTRAK,fbi19,7,AMTRAK
+Penn Station NYC,fbi19,7,Penn Station NYC
+Game Center,fbi18,7,U-haul
+American Bank,"fbi16,fbi15",7,First Union Bank
+Virginia National Bank,fbi15,7,Virginia National Bank
+United Connector,fbi14,7,United Connector
+United Airlines,"fbi14,fbi14",7,United
+Empire State Vending Services,"fbi13,fbi10",7,Empire State Vending Services
+New York Stock Exchange,"fbi12,fbi10",7,New York Stock Exchange
+Indian Army,fbi11,7,University of Virginia
+City Computer Services Corp.,fbi10,7,City Computer Services Corp.
+Health Center,fbi10,7,Clark &amp; Co
+Office Supplies Co.,fbi10,7,Office Supplies Co.
+Select Gourmet Foods,fbi1,7,Select Gourmet Foods
+First Union Bank,fbi1,7,First Union National Bank
+Pyramid Bank,fbi1,7,Pyramid Bank of Cairo
+Dubai Bank,fbi1,7,Central Bank of Dubai
+Sealink Company,cia8,7,Sealink Container Corp.
+FBI,"cia7,cia4,cia10",7,Al Qaeda
+CIA,"cia6,cia11",7,Taliban
+Marvel Corporation,cia6,7,Marvel Corporation
+German Intelligence,cia6,7,German Intelligence
+University of Virginia,cia5,7,American Diplomatic Mission Headquarters
+British Special Branch,cia1,7,British Special Branch
+M15,cia1,7,M15
+Catholic Relief Services,fbi10,7,Sprint
+Diversity Center,fbi21,7,US Post Office
+Politics Center,fbi3,7,INS
+Water for the Poor,fbi18,7,Bush Intercontinental Airport
+Child Care Services,cia1,7,Continental Airlines
+Feed The Poor,"fbi14,fbi14",7,Reagan National Airport
+Chicago Golf Club,fbi1,7,The Powhatan Company
+Health Center,fbi4,7,Pentagon
+Dunder Co.,fbi1,7,Home Depot
+Doctors Org.,fbi19,7,American Airlines
+Santos Club,fbi11,7,Border Patrol
+Green Peace,cia1,7,University of Texas
+Olufsen Institute,fbi8,7,Apex Paper Products Company
+Houston Studio,fbi6,7,Aryan Nations
+Houston Bank,"fbi24,fbi20",7,Army CID
+Ocean Conservancy,fbi14,7,Ryder Truck Rental
+Game Center,fbi5,7,Budget Storage Units
+Rockstar Studios,fbi4,7,Beth Israel
+Returnal,"cia6,cia11",7,Coast Guard
+Ronald McDonald,fbi9,7,Passport Agency
+Seniors Coalition,cia8,7,AMTRAK
+Sleepy Hollow,fbi7,7,Penn Station NYC
+Smithsonian Institution,"fbi8,fbi11,cia4",7,U-haul
+The Impact Foundry,fbi1,7,First Union Bank
+The Museum of Modern Art,fbi15,7,Virginia National Bank
+Women Employed,fbi8,7,United Connector
+World Medical Relief,"cia7,cia4,cia10",7,United
+World Resources Institutes,fbi1,7,Empire State Vending Services
+Wreaths Across America,fbi5,7,New York Stock Exchange
+YES to YOUTH,"fbi13,fbi10",7,University of Virginia
+Sundance Institute,fbi10,7,City Computer Services Corp.
+Teach for America,cia6,7,Clark &amp; Co
+Making Memories,"fbi5,fbi14,cia1",7,Office Supplies Co.
+One-of-a-Kind Creations,docId,7,Select Gourmet Foods
+For the Poor,fbi4,7,First Union National Bank
+They Need Help,cia6,7,Pyramid Bank of Cairo
+Helping Hands,cia5,7,Central Bank of Dubai
+For the Love of Sports,fbi2,7,Sealink Container Corp.
+Purple Fox,"fbi16,fbi15",7,Al Qaeda
+Rose Canyon,fbi6,7,Taliban
+Sapphire Stars,"fbi12,fbi10",7,Marvel Corporation
+The Turquoise Elephant,fbi23,7,German Intelligence
+Silver Stag,fbi19,7,American Diplomatic Mission Headquarters
+Cardinal & Pine,"se1,fbi17,fbi11",7,British Special Branch
+White Cotton Tee,fbi10,7,M15
+Corduroy & Satin,fbi8,7,Sprint
+Log Cabin,cia8,7,US Post Office
+Pink Plaid,fbi6,7,INS
+Cambridge Avenue,fbi4,7,Bush Intercontinental Airport
+Morningside Heights,fbi14,7,Continental Airlines
+Greenleaf Court,"fbi8,fbi11,cia4",7,Reagan National Airport
+Winthrop Park,fbi5,7,The Powhatan Company
+Victoria Glen,fbi8,7,Pentagon
+River Stone,se2,7,Home Depot
+The Watercolor,fbi4,7,American Airlines
+Pink Crescent Moon,fbi15,7,Border Patrol
+Dewdrops & Sunlight,fbi5,7,University of Texas
+Ready Home,fbi19,7,Apex Paper Products Company
+Green House,fbi1,7,Aryan Nations
+Decluttering Burst,docId,7,Army CID
+Complete Look,fbi6,7,Ryder Truck Rental
+House Spic,cia1,7,Budget Storage Units
+Base Fresh,"fbi16,fbi15",7,Beth Israel
+Place Tonic,fbi10,7,Coast Guard
+Libra Foundation,"cia6,cia11",7,Passport Agency
+The Salvation Army,cia6,7,AMTRAK
+Dove Trust fund,fbi5,7,Penn Station NYC
+Story Corps,fbi2,7,U-haul
+Gracious Givers,fbi9,7,First Union Bank
+Greater Purpose,fbi1,7,Virginia National Bank
+My Donation Connection,fbi1,7,United Connector
+Epilepsy Outlook,cia1,7,United
+Fight Cancer Charity,fbi1,7,Empire State Vending Services
+Generous Hearts,cia6,7,New York Stock Exchange
+Spring world Charities inc,fbi18,7,University of Virginia
+Hunger Solution inc,"fbi13,fbi10",7,City Computer Services Corp.
+Tip of the Hats,fbi8,7,Clark &amp; Co
+Funding Child Dreams,fbi4,7,Office Supplies Co.
+Epilepsy Foundation,fbi20,7,Select Gourmet Foods
+Saved Dreams,fbi8,7,First Union National Bank
+Refresh Bolivia,fbi3,7,Pyramid Bank of Cairo
+Utopian world Charities,fbi4,7,Central Bank of Dubai
+The Donation Time,fbi10,7,Sealink Container Corp.
+Brand new life Org,cia4,7,Al Qaeda
+Serenity Org,cia5,7,Taliban
+Life Love Charity,fbi21,7,Marvel Corporation
+Jain Foundation,"fbi12,fbi10",7,German Intelligence
+Dream Center,fbi23,7,American Diplomatic Mission Headquarters
+For the Children,fbi10,7,British Special Branch
+Goal Quest,fbi11,7,M15
+Africare,fbi19,7,Sprint
+Wreaths Across America,fbi7,7,US Post Office
+Samsara Foundation,fbi10,7,INS
+Feed my People,cia10,7,Bush Intercontinental Airport
+Conservation International,cia7,7,Continental Airlines
+Spirit of Giving,cia5,7,Reagan National Airport
+Clever Charity,cia4,7,The Powhatan Company
+Carbon Fund,cia3,7,Pentagon
+Nationwide Research Fund,fbi2,7,Home Depot
+Ocean Conservancy,fbi1,7,American Airlines
+Houston Endowment,cia7,7,Border Patrol
+Angel Time,cia5,7,University of Texas
+Varkey Foundation,cia4,7,Apex Paper Products Company
+Allegheny Foundation,cia3,7,Aryan Nations
+Network for Good,fbi2,7,Army CID
+White Wolf Technologies,fbi19,7,Ryder Truck Rental
+Titanium Solutions,fbi18,7,Budget Storage Units
+White Wolf Arts,"fbi16,fbi15",7,Beth Israel
+Joytechs,fbi15,7,Coast Guard
+Chiefoods,fbi14,7,Passport Agency
+Jupitelligence,"fbi14,fbi14",7,AMTRAK
+Goblintelligence,"fbi13,fbi10",7,Penn Station NYC
+Petalworth,fbi9,7,U-haul
+Pixelworth,"fbi8,fbi11,cia4",7,First Union Bank
+Forestshine,fbi8,7,Virginia National Bank
+Orc Systems,fbi8,7,United Connector
+Cavern Arts,fbi8,7,United
+Berry Industries,fbi7,7,Empire State Vending Services
+Goldustries,fbi6,7,New York Stock Exchange
+Stardustechnologies,fbi6,7,University of Virginia
+Microlutions,"fbi5,fbi14,cia1",7,City Computer Services Corp.
+Allico,fbi5,7,Clark &amp; Co
+Dynamicsun,fbi5,7,Office Supplies Co.
+Lionessdew,fbi4,7,Select Gourmet Foods
+Accentshack,fbi4,7,First Union National Bank
+Rose,fbi4,7,Pyramid Bank of Cairo
+Enigma Softwares,fbi3,7,Central Bank of Dubai
+Prodigy Systems,"fbi24,fbi20",7,Sealink Container Corp.
+Oracleutions,fbi23,7,Al Qaeda
+Berrycords,fbi21,7,Taliban
+Padlockurity,fbi2,7,Marvel Corporation
+Topiarytelligence,fbi19,7,German Intelligence
+Nymphworth,fbi19,7,American Diplomatic Mission Headquarters
+Spirithouse,fbi18,7,British Special Branch
+Mermaidman,"fbi16,fbi15",7,M15
+Angel Entertainment,fbi15,7,Sprint
+Voyage Enterprises,fbi14,7,US Post Office
+Hound Softwares,"fbi14,fbi14",7,INS
+Spherecords,"fbi13,fbi10",7,Bush Intercontinental Airport
+Zeusolutions,"fbi12,fbi10",7,Continental Airlines
+Marsoftwares,fbi11,7,Reagan National Airport
+Crowares,fbi10,7,The Powhatan Company
+Gemmaster,fbi10,7,Pentagon
+Squidworld,fbi10,7,Home Depot
+Ridgeworld,fbi1,7,American Airlines
+OptimEngagement,fbi1,7,Border Patrol
+Final Level,fbi1,7,University of Texas
+End Point,fbi1,7,Apex Paper Products Company
+Wildflowers,cia8,7,Aryan Nations
+Top Catch,"cia7,cia4,cia10",7,Army CID
+Premium Integrations,"cia6,cia11",7,Ryder Truck Rental
+Bits & Pieces,cia6,7,Budget Storage Units
+Etc. ,cia6,7,Beth Israel
+Into the Unknown,cia5,7,Coast Guard
+The Wonder Collective,cia1,7,Passport Agency
+Dream Scenes,cia1,7,AMTRAK
+Victory First   ,fbi10,7,Penn Station NYC
+Into Excellence   ,fbi21,7,U-haul
+The Source   ,fbi3,7,First Union Bank
+The Hive,fbi18,7,Virginia National Bank
+BuyBusters,cia1,7,United Connector
+Star Square,"fbi14,fbi14",7,United
+East Elm   ,fbi1,7,Empire State Vending Services
+SunSide ,fbi4,7,New York Stock Exchange
+Hues of Blues,fbi1,7,University of Virginia
+Green Team,fbi19,7,City Computer Services Corp.
+Blessed Rest ,fbi11,7,Clark &amp; Co
+The Home Dome,cia1,7,Office Supplies Co.
+Peak Performance,fbi8,7,Select Gourmet Foods
+Sweet Street,fbi6,7,First Union National Bank
+SnapStitch,"fbi24,fbi20",7,Pyramid Bank of Cairo
+Code Creations,fbi14,7,Central Bank of Dubai
+Treasure Trove,fbi5,7,Sealink Container Corp.
+FlashFresh,fbi4,7,Al Qaeda
+Pristine Purpose ,"cia6,cia11",7,Taliban
+Furs Kips,fbi9,7,Marvel Corporation
+Limner Studio,cia8,7,German Intelligence
+XyloFurniture,fbi7,7,American Diplomatic Mission Headquarters
+Pop-Culture,"fbi8,fbi11,cia4",7,British Special Branch
+Spray Shop,fbi1,7,M15
+Find Agenda,fbi15,7,Sprint
+CraftCreate,fbi8,7,US Post Office
+FirstVictory,"cia7,cia4,cia10",7,INS
+MoonStore,fbi1,7,Bush Intercontinental Airport
+Silence Center,fbi5,7,Continental Airlines
+WildWest,"fbi13,fbi10",7,Reagan National Airport
+Heart Beat,fbi10,7,The Powhatan Company
+Legend Soul,cia6,7,Pentagon
+Maxima Company,"fbi5,fbi14,cia1",7,Home Depot
+Winter Shop,docId,7,American Airlines
+TV-Partner,fbi4,7,Border Patrol
+LiftCenter,cia6,7,University of Texas
+Forest Shop,cia5,7,Apex Paper Products Company
+Thesis Company,fbi2,7,Aryan Nations
+MusicMany,"fbi16,fbi15",7,Army CID
+BreakDown,fbi6,7,Ryder Truck Rental
+Lion Family,"fbi12,fbi10",7,Budget Storage Units
+Level Travel,fbi23,7,Beth Israel
+Ethnic Shop,fbi19,7,Coast Guard
+Early Bird,"se1,fbi17,fbi11",7,Passport Agency
+Soprano House,fbi10,7,AMTRAK
+Red Room,fbi8,7,Penn Station NYC
+Novel Center,cia8,7,U-haul
+Modestico,fbi6,7,First Union Bank
+First Award,fbi4,7,Virginia National Bank
+Traffic Center,fbi14,7,United Connector
+Ice Castle,"fbi8,fbi11,cia4",7,United
+KnowChance,fbi5,7,Empire State Vending Services
+NoWorries,fbi8,7,New York Stock Exchange
+Elegance,se2,7,University of Virginia
+Win Ribbon,fbi4,7,City Computer Services Corp.
+Rent Platform,fbi15,7,Clark &amp; Co
+ZeroClerk,fbi5,7,Office Supplies Co.
+ReactRegister,fbi19,7,Select Gourmet Foods
+Paper City,fbi1,7,First Union National Bank
+Witch Union,docId,7,Pyramid Bank of Cairo
+Poem House,fbi6,7,Central Bank of Dubai
+Graphic Master,cia1,7,Sealink Container Corp.
+ReadySketch,"fbi16,fbi15",7,Al Qaeda
+Live Symbol,fbi10,7,Taliban
+Fresh Accent,"cia6,cia11",7,Marvel Corporation
+Flash Illusion,cia6,7,German Intelligence
+Bluelake Realtors,fbi5,7,American Diplomatic Mission Headquarters
+Yummy Meals,fbi2,7,British Special Branch
+Best Bytes,fbi9,7,M15
+Kino Energy,fbi1,7,Sprint
+Saturn Wipers,fbi1,7,US Post Office
+PoseidonS Plates,cia1,7,INS
+Distinct Clips,fbi1,7,Bush Intercontinental Airport
+Argo Energy,cia6,7,Continental Airlines
+Arc Security,fbi18,7,Reagan National Airport
+Fentech Batteries,"fbi13,fbi10",7,The Powhatan Company
+Crystal Diner,fbi8,7,Pentagon
+Crwonville Hotels,fbi4,7,Home Depot
+Seaview Properties,fbi20,7,American Airlines
+Megatech,fbi8,7,Border Patrol
+CyberMunch,fbi3,7,University of Texas
+Digiwell,fbi4,7,Apex Paper Products Company
+Innovix,fbi10,7,Aryan Nations
+Cloudmore,cia4,7,Army CID
+Systemiq,cia5,7,Ryder Truck Rental
+Smartsoft,fbi21,7,Budget Storage Units
+Clickwell,"fbi12,fbi10",7,Beth Israel
+Weblund,fbi23,7,Coast Guard
+Quanterra,fbi10,7,Passport Agency
+Avantex,fbi11,7,AMTRAK
+Ventura,fbi19,7,Penn Station NYC
+Sphere,fbi7,7,U-haul
+Bitling,fbi10,7,First Union Bank
+Elementaliq,cia10,7,Virginia National Bank
+Tech Wreck,cia7,7,United Connector
+CyberFiber,cia5,7,United
+Tech Check,cia4,7,Empire State Vending Services
+BitSkit,cia3,7,New York Stock Exchange
+Click Tick,fbi2,7,University of Virginia
+Soft Loft,fbi1,7,City Computer Services Corp.
+Online Airline,cia7,7,Clark &amp; Co
+Wire Attire,cia5,7,Office Supplies Co.
+ByteWrite,cia4,7,Select Gourmet Foods
+SpaceChase,cia3,7,First Union National Bank
+Software Flair,fbi2,7,Pyramid Bank of Cairo
+Innovation Station,"se1,fbi17,fbi11",7,Central Bank of Dubai
+Sky High,fbi9,7,Sealink Container Corp.
+LabTab,"fbi8,fbi11,cia4",7,Al Qaeda
+AppCap,fbi8,7,Taliban
+BluePond,fbi8,7,Marvel Corporation
+Interstellar,fbi8,7,German Intelligence
+7 Stream,fbi7,7,American Diplomatic Mission Headquarters
+AstraMind,fbi6,7,British Special Branch
+RedSpace,fbi6,7,M15
+Cyber Monkey,"fbi5,fbi14,cia1",7,Sprint
+Carat Wire,fbi5,7,US Post Office
+Riverbed,fbi5,7,INS
+Circular,fbi4,7,Bush Intercontinental Airport
+99% Percent,fbi4,7,Continental Airlines
+Aurora Alliance,fbi4,7,Reagan National Airport
+Vantage Group,fbi3,7,The Powhatan Company
+Delta Smile,"fbi24,fbi20",7,Pentagon
+SmartSeer,fbi23,7,Home Depot
+Tomorrow,fbi21,7,American Airlines
+Zesty Zingers,fbi2,7,Border Patrol
+Eager Essence,fbi19,7,University of Texas
+Voila Victory,fbi19,7,Apex Paper Products Company
+Push To Start,fbi18,7,Aryan Nations
+Slick Systems,"fbi16,fbi15",7,Army CID
+All Systems Go,fbi15,7,Ryder Truck Rental
+Catch Up!,fbi14,7,Budget Storage Units
+Run This Town,"fbi14,fbi14",7,Beth Israel
+LetS Roll,"fbi13,fbi10",7,Coast Guard
+Roll Up,"fbi12,fbi10",7,Passport Agency
+Hot Takes,fbi11,7,AMTRAK
+For The Thrill,fbi10,7,Penn Station NYC
+Thrill Of The Chase,fbi10,7,U-haul
+Will Thrill,fbi10,7,First Union Bank
+Electric Essence,fbi1,7,Virginia National Bank
+Feel Electric,fbi1,7,United Connector
+Slick Services,fbi1,7,United
+Pick Slick,fbi1,7,Empire State Vending Services
+Rev Up,cia8,7,New York Stock Exchange
+Cool Solutions,"cia7,cia4,cia10",7,University of Virginia
+Too Cool,"cia6,cia11",7,City Computer Services Corp.
+Ready Rides,cia6,7,Clark &amp; Co
+Opulent Obsession,cia6,7,Office Supplies Co.
+Obsessed Opportunities,cia5,7,Select Gourmet Foods
+Compelling Convo,cia1,7,First Union National Bank
+Crafty Conversations,cia1,7,Pyramid Bank of Cairo
+Get Crafty,fbi10,7,Central Bank of Dubai
+Cool And Crafty,fbi21,7,Sealink Container Corp.
+Icy Nicey,fbi3,7,Al Qaeda
+Icy Cool,fbi18,7,Taliban
+Icy Expressions,cia1,7,Marvel Corporation
+Amped Up,"fbi14,fbi14",7,German Intelligence
+Amped Ambition,fbi1,7,American Diplomatic Mission Headquarters
+Zesty Zoom,fbi4,7,British Special Branch
+Spice Of Life,fbi1,7,M15
+Dash Of Daring,fbi19,7,Sprint
+Truth Or Dare,fbi11,7,US Post Office
+Gotta Dash,cia1,7,INS
+On The Move,fbi8,7,Bush Intercontinental Airport
+Winning Wonder,fbi6,7,Continental Airlines
+Wins Begin,"fbi24,fbi20",7,Reagan National Airport
+Smooth Operators,fbi14,7,The Powhatan Company
+Smooth Operation,fbi5,7,Pentagon
+Too Cool,fbi4,7,Home Depot
+Cool Corp.,"cia6,cia11",7,American Airlines
+Flashy Favorites,fbi9,7,Border Patrol
+Flash In Action,cia8,7,University of Texas
+Active Assets,fbi7,7,Apex Paper Products Company
+All The Power,"fbi8,fbi11,cia4",7,Aryan Nations
+Power Pros,fbi1,7,Army CID
+String Sing,fbi15,7,Ryder Truck Rental
+Excellent Essence,fbi8,7,Budget Storage Units
+Exciting Sites,"cia7,cia4,cia10",7,Beth Israel
+Coolest Cats,fbi1,7,Coast Guard
+Zing Zang,fbi5,7,Passport Agency
+Mr. Cool,"fbi13,fbi10",7,AMTRAK
+City Slick,fbi10,7,Penn Station NYC
+The Silver Bullet,cia6,7,U-haul
+The One And Only,"fbi5,fbi14,cia1",7,First Union Bank
+Lost In The Stars,docId,7,Virginia National Bank
+Interstellar,fbi4,7,United Connector
+Beyond Belief,cia6,7,United
+Beauty Is In The Eye,cia5,7,Empire State Vending Services
+Beyond Basic,fbi2,7,New York Stock Exchange
+Back To The Basics,"fbi16,fbi15",7,University of Virginia
+Crystal Clear,fbi6,7,City Computer Services Corp.
+Cut Throat,"fbi12,fbi10",7,Clark &amp; Co
+The Marvelous Mouse,fbi23,7,Office Supplies Co.
+Fabulous FairyS,fbi19,7,Select Gourmet Foods
+The Feathered Hen,"se1,fbi17,fbi11",7,First Union National Bank
+Birdsong,fbi10,7,Pyramid Bank of Cairo
+The Birds Nest,fbi8,7,Central Bank of Dubai
+The Lions Den,cia8,7,Sealink Container Corp.
+Freestyle,fbi6,7,Al Qaeda
+Aquamarine,fbi4,7,Taliban
+Whisper Willow,fbi14,7,Marvel Corporation
+Breeze Blows,"fbi8,fbi11,cia4",7,German Intelligence
+The Whisperer,fbi5,7,American Diplomatic Mission Headquarters
+Pen And Paper,fbi8,7,British Special Branch
+The FairytaleS Beginning,se2,7,M15
+Mystique,fbi4,7,Sprint
+The Shimmer,fbi15,7,US Post Office
+Light Wings,fbi5,7,INS
+The Loyal Follower,fbi19,7,Bush Intercontinental Airport
+Band Of Flowers,fbi1,7,Continental Airlines
+Cool Collective,docId,7,Reagan National Airport
+The Collective,fbi6,7,The Powhatan Company
+What A Catch,cia1,7,Pentagon
+The Time Teller,"fbi16,fbi15",7,Home Depot
+The Test Of Time,fbi10,7,American Airlines
+Fleeting Foxes,"cia6,cia11",7,Border Patrol
+Fish Out Of Water,cia6,7,University of Texas
+The Phantom And The Fairy,fbi5,7,Apex Paper Products Company
+Autumn Winds,fbi2,7,Aryan Nations
+Winter Winds,fbi9,7,Army CID
+Life Of The Party,fbi1,7,Ryder Truck Rental
+Practicalities And More,fbi1,7,Budget Storage Units
+Cool Beans,cia1,7,Beth Israel
+TravelerS Tale,fbi1,7,Coast Guard
+The Lonely Traveler,cia6,7,Passport Agency
+The Rugged Traveler,fbi18,7,AMTRAK
+The Echo Chamber,"fbi13,fbi10",7,Penn Station NYC
+Time Flies,fbi8,7,U-haul
+The Orchid,fbi4,7,First Union Bank
+Hair Today,fbi20,7,Virginia National Bank
+Curl Up And Dye,fbi8,7,United Connector
+Hairhouse,fbi3,7,United
+Dye Hard,fbi4,7,Empire State Vending Services
+Clip Shop,fbi10,7,New York Stock Exchange
+Hair We Go,cia4,7,University of Virginia
+Hair To Please,cia5,7,City Computer Services Corp.
+Shearly Beloved,fbi21,7,Clark &amp; Co
+Hand Job Nail Salon,"fbi12,fbi10",7,Office Supplies Co.
+Shearshank Redemption,fbi23,7,Select Gourmet Foods
+Locksmith,fbi10,7,First Union National Bank
+Loose Ends,fbi11,7,Pyramid Bank of Cairo
+Split Ends,fbi19,7,Central Bank of Dubai
+RazorS Edge,fbi7,7,Sealink Container Corp.
+Get Buzzed,fbi10,7,Al Qaeda
+The Pie Chart,cia10,7,Taliban
+Cake Walk,cia7,7,Marvel Corporation
+Get Sconed,cia5,7,German Intelligence
+The Upper Crust,cia4,7,American Diplomatic Mission Headquarters
+Gone A Rye,cia3,7,British Special Branch
+Just Roll With It,fbi2,7,M15
+I Loaf You,fbi1,7,Sprint
+The Booze Hound,cia7,7,US Post Office
+We Have What Ales Ya,cia5,7,INS
+The Tipsy Tavern,cia4,7,Bush Intercontinental Airport
+Tequila Mockingbird,cia3,7,Continental Airlines
+Wish You Were Beer,fbi2,7,Reagan National Airport
+The Shakesbeer,cia5,7,The Powhatan Company
+Ale Aboard,fbi21,7,Pentagon
+Wine Not,"fbi12,fbi10",7,Home Depot
+The Grapevine,fbi23,7,American Airlines
+Pie In The Sky,fbi10,7,Border Patrol
+The Cod Father,fbi11,7,University of Texas
+Thai Me Up,fbi19,7,Apex Paper Products Company
+Nim Come Soup,fbi7,7,Aryan Nations
+The Nosh Pit,fbi10,7,Army CID
+Struck By Whitening,cia10,7,Ryder Truck Rental
+Caps And Crowns,cia7,7,Budget Storage Units
+The Whole Tooth,cia5,7,Beth Israel
+WeRe Bi-Molar,cia4,7,Coast Guard
+Pearls Of Wisdom,cia3,7,Passport Agency
+The Filling Station,fbi2,7,AMTRAK
+You Know The Drill,fbi1,7,Penn Station NYC
+Flossy Pants,cia7,7,U-haul
+Wok This Way,cia5,7,First Union Bank
+Lord Of The Fries,cia4,7,Virginia National Bank
+Pita Piper,cia3,7,United Connector
+Life Of Pie,fbi2,7,United

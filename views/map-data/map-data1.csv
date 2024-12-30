@@ -1,0 +1,151 @@
+id,label,lat,lng,location
+1,Abakan,53.7167,91.4167,2932 University Drive
+2,Akimiski Island,52.997486,-81.319298,Afghanistan
+3,Alaska,63.588753,-154.493062,Alder St
+4,Alberta,55,-115,Amsterdam
+5,Andorra,42.546245,1.601554,Marshall Avenue
+6,Maldives,3.202778,73.22068,Boston
+7,Arkhangelsk,64.55,40.5333,Bowling Green
+8,Aruba,12.52111,-69.968338,Bremerhaven
+9,Australia,-28.0167,153.4,Bronx
+10,Baffin Island,66.830925,-69.6008,Buenos Aires
+11,Bangladesh,23.684994,90.356331,Cairo
+12,Barnaul,53.3567,83.7872,California
+13,Belarus,53.7098,27.9534,Camp George West Military Reservation
+14,Belgium,50.503887,4.469936,Canada
+15,Belgorod,50.6,36.6,Capitol Ave.
+16,Benoy,42.9774,46.3094,Charlottesville
+17,Berdyuzhye,55.8042,68.3,Chicago
+18,Birobidzhan,48.7833,132.9333,City Park
+19,Brazil,-14.235,-51.9253,Coal Mine Road
+20,British Columbia,53.726669,-127.647621,Colfax Avenue
+21,Brunei,4.5353,114.7277,Colorado
+22,California,36.778261,-119.417932,Columbus
+23,Canada,52.9399,-73.5491,Cuba
+24,Cayman Islands,19.513469,-80.566956,Culver City
+25,Cheboksary,56.1333,47.25,Denver
+26,Chile,-35.6751,-71.543,Detroit
+27,Cocos [Keeling] Islands,-12.164165,96.870956,Dulles Airport
+28,Cornwallis Island,75.073013,-94.669189,Egypt
+29,Croatia,45.1,15.2,El Paso
+30,Djibouti,11.825138,42.590275,El Segundo
+31,Dominica,15.414999,-61.370976,Europe
+32,Dominican Republic,18.7357,-70.1627,Floyd Ave.
+33,Dubovka,49.05,44.8333,France
+34,Ecuador,-1.831239,-78.183406,Georgia
+35,El Salvador,13.794185,-88.89653,Germany
+36,Morocco,31.791702,-7.09262,Green Bay
+37,Equatorial Guinea,1.650801,10.267895,Greenlawn Ave.
+38,Eritrea,15.179384,39.782334,Guantanamo
+39,Fiji,-16.578193,175.414413,Haarlem
+40,Finland,61.92411,25.748151,Hamburg
+41,Florida,27.664827,-81.515754,Hezboliah
+42,Germany,51.165691,10.451526,Houston
+43,Ghana,7.946527,-1.023194,Howell St.
+44,Mongolia,46.862496,103.846656,Howell St.
+45,Greece,39.074208,21.824312,Hudspeth County
+46,Guinea-Bissau,11.803749,-15.180413,Illinois
+47,Hawaii,19.898682,-155.665857,Imperial Highway
+48,Heard Island and McDonald Islands,-53.08181,73.504158,Kandahar
+49,Iceland,64.9631,-19.0208,Kentucky
+50,Illinois,40.633125,-89.398528,Keswick
+51,Irkutsk,52.2833,104.3,Laurel Avenue
+52,Israel,31,35,LAX
+53,Japan,36,138,Lee Highway
+54,Jersey,49.214439,-2.13125,Little York Rd.
+55,Kazakhstan,48.019573,66.923684,London
+56,Kiribati,-3.370417,-168.734039,Los Angeles
+57,Kuwait,29.5,47.75,Lublin
+58,Laos,19.85627,102.495496,Manhattan
+59,Liechtenstein,47.14,9.55,Marshall Avenue
+60,Luza,60.6167,47.2833,McNary
+61,Maarmorilik,71.1264,-51.2778,McRae Blvd
+62,Macau,22.198745,113.543873,Merrifield
+63,Madagascar,-18.766947,46.869107,Miami
+64,Maine,45.253783,-69.445469,Michigan
+65,Malaysia,2.5,112.5,Minneapolis
+66,Maldives,3.202778,73.22068,Minnesota
+67,Mali,17.570692,-3.996166,Myrtle Ave
+68,Malta,35.937496,14.375416,New Jersey
+69,Marshall Islands,7.131474,171.184478,New Orleans
+70,Maryland,39.045755,-76.641271,New York
+71,Massachusetts,42.407211,-71.382437,New York City
+72,Mauritania,21.00789,-10.940835,North Bergen
+73,Mexico,23.634501,-102.552784,O'Hare
+74,Minnesota,46.729553,-94.6859,Paddington
+75,Mississippi,32.354668,-89.398528,Paris
+76,Monaco,43.750298,7.412841,Poland
+77,Mongolia,46.862496,103.846656,Queens
+78,Montana,46.879682,-110.362566,Rhinelander Platz.
+79,Montana,46.879682,-110.362566,Richmond
+80,Morocco,31.7917,-7.0926,Rio Grande
+81,Murmansk,68.9667,33.0833,Rue St. Sebastien
+82,Myanmar [Burma],21.913965,95.956223,San Gabriel
+83,Narsaq,60.9122,-46.0486,Seattle
+84,Narsaq,60.9122,-46.0486,Sheldon St.
+85,Nebraska,41.492537,-99.901813,Springfield
+86,Neftegorsk,52.8,51.1667,Springfield Mall
+87,Neman,55.0333,22.0333,Springfield VA
+88,New South Wales,-31.840233,145.612793,St. Mary 's Terrace
+89,New Zealand,-40.9006,174.886,St. Mary's Road
+90,Newfoundland and Labrador,53.135509,-57.660435,Sudan
+91,Nigeria,9.081999,8.675277,Texas
+92,Noginsk,64.4833,91.2333,The Netherlands
+93,Northern Mariana Islands,17.33083,145.38469,Trenton
+94,Norway,60.472024,8.468946,Trenton Avenue
+95,Nyandoma,61.6667,40.2,United Arab Emirates
+96,Oklahoma,35.007752,-97.092877,University Drive
+97,Oktyabr'skiy,54.4833,53.4833,US
+98,Oman,21.512583,55.923255,Van Dyke Avenue
+99,Ontario,50,-85,Virginia
+100,Oregon,43.804133,-120.554201,Wash. DC
+101,Madhya Pradesh,22.9734229,78.6568942,Washington
+102,Orsk,51.229,58.4681,Washington DC
+103,Paamiut,61.9956,-49.6636,Webster Ave.
+104,Peru,-9.189967,-75.015152,Wisconsin
+105,Petrozavodsk,61.7833,34.35,London
+106,Poland,51.919438,19.145136,Los Angeles
+107,Prince Edward Island,46.25,-63,Lublin
+108,Kaluga,54.5333,36.2667,Manhattan
+109,Qasigiannguit,68.8201,-51.1932,Marshall Avenue
+110,Rostov,47.2333,39.7167,McNary
+111,Saint Helena,-24.143474,-10.030696,McRae Blvd
+112,Salt Spring Island,48.816662,-123.508873,Merrifield
+113,Salt Spring Island,48.816662,-123.508873,Miami
+114,Saratov,51.5333,46,Michigan
+115,Scoresbysund,70.4853,-21.9667,Minneapolis
+116,Scoresbysund,70.4853,-21.9667,Minnesota
+117,Serbia,44.0165,21.0059,Myrtle Ave
+118,Sierra Leone,8.460555,-11.779889,New Jersey
+119,Singapore,1.2833,103.8333,New Orleans
+120,Slovakia,48.669026,19.699024,New York
+121,Smolensk,54.7828,32.0453,New York City
+122,Solomon Islands,-9.64571,160.156194,North Bergen
+123,South Africa,-30.5595,22.9375,O'Hare
+124,South Carolina,33.836081,-81.163725,Paddington
+125,South Korea,35.907757,127.766922,Paris
+126,Ranong,9.9528702,98.6084641,Poland
+127,Swaziland,-26.522503,31.465866,Queens
+128,Tazovskiy,67.4667,78.7,Rhinelander Platz.
+129,Texas,31.968599,-99.901813,Richmond
+130,Thailand,15.870032,100.992541,Rio Grande
+131,Tokelau,-8.967363,-171.855881,Rue St. Sebastien
+132,Tunisia,34,9,San Gabriel
+133,Tver,56.8578,35.9219,Seattle
+134,Ust'-Dzheguta,44.0928,41.9822,Sheldon St.
+135,Ust'-Maya,60.4566,134.5433,Springfield
+136,Utah,39.32098,-111.093731,Springfield Mall
+137,Uzbekistan,41.377491,64.585262,Springfield VA
+138,Vanuatu,-15.376706,166.959158,St. Mary 's Terrace
+139,Victoria,-37.0201,144.9646,St. Mary's Road
+140,Vladivostok,43.1167,131.9,Sudan
+141,Vologda,59.2167,39.9,Texas
+142,Western Australia,-25.042261,117.793221,The Netherlands
+143,Wyoming,43.075968,-107.290284,Trenton
+144,Wyoming,43.075968,-107.290284,Trenton Avenue
+145,Yekaterinburg,56.8356,60.6128,United Arab Emirates
+146,Yemen,15.552727,48.516388,University Drive
+147,Yuriung-Khaya,72.81416,40.5333,US
+148,Yuzhno-Sakhalinsk,46.95,142.7333,Springfield VA
+149,Zambia,-13.133897,27.849332,Springfield Mall
+150,Zimbabwe,-19.015438,29.154857,Sheldon St.

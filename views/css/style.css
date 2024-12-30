@@ -1,0 +1,294 @@
+body,
+body * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; /* Added sans-serif for fallback */
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+body > div {
+  padding: 20px;
+}
+
+div.left {
+  /* flex: 2;  Removed flex and used width only for fixed width */
+  width: 15%;
+  min-width: 15%;
+}
+
+div.right {
+  /* flex: 8; Removed flex and used width only for fixed width */
+  width: 85%;
+  min-width: 85%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+#boardG {
+  width: 100%;
+  min-width: 85%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+#boardG .right {
+  height: 100vh;
+  width: 100%;
+}
+
+div.note {
+  background-color: #989898;
+  width: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4); /* Adjusted box shadow for a softer look */
+  position: absolute;
+  z-index: 99;
+  border-radius: 4px; /* Added rounded corners */
+}
+
+div.note h3 {
+  background-color: #f0f0f5; /* Light gray, neutral background */
+  padding: 10px 15px;        /* Adjusted padding for balance */
+  font-size: 16px;          /* Slightly larger font size */
+  font-weight: 600;         /* Semi-bold font weight */
+  color: #333;              /* Darker text color for contrast */
+  border: 1px solid #ccc;    /* Subtle border */
+  border-bottom: 2px solid #0d6efd; /* Distinct bottom border, primary color accent */
+  border-radius: 5px 5px 0 0; /* Slightly more rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  user-select: none;          /* Prevent accidental text selection */
+  cursor: default;            /* Default cursor, not a text cursor */
+}
+
+div.note p {
+  font-size: 13px;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #666; /* Lighter border color */
+  border-top: none;
+  line-height: 1.4; /* Increased line-height slightly */
+  position: relative;
+}
+
+div.note .close_note {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+  cursor: pointer;
+  color: #000000; /* Ensure visibility */
+  font-size: 18px; /* Increased size for easier clicking */
+  line-height: 1; /* Adjust line height to vertically center */
+}
+
+.menu-options {
+  list-style: none;
+  padding: 10px 0;
+
+  .menu-option {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Added smooth transition for hover effect */
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.highlighted-text {
+  background-color: #FFFF99; /* Lighter yellow */
+  color: #000;
+  padding: 0.1em; /* Add small padding */
+}
+
+.custom-menu,
+.svg-custom-menu {
+  display: none;
+  position: absolute;
+  z-index: 101;
+  background: #fff;
+  list-style-type: none;
+  border: 1px solid #ccc; /* Added border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Added subtle shadow */
+  border-radius: 4px; /* Added rounded corners */
+}
+
+.menu-item,
+.svg-menu-item {
+  cursor: pointer;
+  padding: 0.5rem;
+  white-space: nowrap; /* Prevent menu items from wrapping */
+}
+
+.menu-item:hover,
+.svg-menu-item:hover {
+  background-color: #ADFF2F;
+}
+
+.right .matrix-element {
+  display: block !important;
+  height: 100% !important;
+  overflow-y: auto !important; /* Changed to 'auto' to only show scrollbar when needed */
+  overflow-x: auto !important; /* Changed to 'auto' to only show scrollbar when needed */
+}
+
+.all-data-box,
+.matrix-data-box {
+  height: 50rem;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 255, 255) !important;
+  display: none;
+  padding-bottom: 1.9rem;
+  border: 1px solid #ccc; /* Added border */
+}
+
+.all-data-box {
+  width: 50rem !important;
+  height: 40rem;
+}
+
+.all-data-wrapper,
+.bubblemap-wrapper {
+  overflow: hidden;
+  outline: none;
+}
+
+.all-data {
+  width: 100%;
+  height: 100%;
+  border: none !important;
+}
+
+.all-data svg {
+  width: 100%;
+  height: 100%;
+}
+
+.matrix-data {
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+}
+
+.matrix-data svg {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.button-wrapper {
+  margin: 2rem 0;
+}
+
+.button-wrapper input {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem; /* Added padding */
+  border: 1px solid #ccc; /* Added border */
+  border-radius: 4px; /* Added rounded corners */
+  cursor: pointer; /* Indicate clickability */
+}
+
+.bubblemap-box {
+  height: 15rem;
+  background: rgb(255, 255, 255) !important;
+  margin: 0;
+  padding-bottom: 1.9rem;
+  display: none;
+  border: 1px solid #ccc; /* Added border */
+}
+
+.bubblemap-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bubblemap {
+  border: none !important;
+}
+
+.all-data-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ontop {
+  position: absolute;
+}
+
+.ui-draggable-helper {
+  border: 1px dotted #000;
+  padding: 6px;
+  background: #fff;
+  font-size: 1.2em;
+  opacity: 0.8; /* Make it slightly transparent */
+}
+
+.dupcirc {
+  position: fixed;
+  z-index: 999;
+  color: black;
+  /* Improve visibility */
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+#bubbleMap circle {
+  /* Default styles for all bubbles */
+  stroke: #fff; /* White outline */
+  stroke-width: 2px; /* Outline thickness */
+  transition: fill 0.3s ease, stroke-width 0.3s ease, r 0.3s ease; /* Smooth transitions */
+}
+
+#bubbleMap circle:hover {
+  /* Styles on hover */
+  stroke: #000; /* Black outline on hover */
+  stroke-width: 3px; /* Thicker outline on hover */
+  r: attr(r) * 1.1; /* Slightly increase size on hover */
+  cursor: pointer; /* Indicate clickability */
+}
+
+
+#organizesvg rect {
+  /* Default styles for all rectangles */
+  stroke: #fff; /* White outline */
+  stroke-width: 2px; /* Outline thickness */
+  transition: fill 0.3s ease, stroke-width 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  transform-origin: center; /* Ensure scaling happens from center */
+  transform-box: fill-box; /* Use the element's bounding box for transforms */
+}
+
+#organizesvg rect:hover {
+  /* Styles on hover */
+  stroke: #000; /* Black outline on hover */
+  stroke-width: 3px; /* Thicker outline on hover */
+  transform: scale(1.1); /* Scale up by 10% on hover */
+  cursor: pointer; /* Indicate clickability */
+}
+
+#graphbox circle {
+  /* Default styles for all bubbles */
+  stroke: #fff; /* White outline */
+  stroke-width: 2px; /* Outline thickness */
+  transition: fill 0.3s ease, stroke-width 0.3s ease, r 0.3s ease; /* Smooth transitions */
+}
+
+#graphbox circle:hover {
+  /* Styles on hover */
+  stroke: #000; /* Black outline on hover */
+  stroke-width: 3px; /* Thicker outline on hover */
+  r: attr(r) * 1.1; /* Slightly increase size on hover */
+  cursor: pointer; /* Indicate clickability */
+}
