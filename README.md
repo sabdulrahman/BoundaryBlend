@@ -1,2 +1,3 @@
 Run node index.js
-"# MultipleViews" 
+
+A framework for bridging boundaries in multiple-view visualizations. 
