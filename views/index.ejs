@@ -2909,326 +2909,1590 @@
 
             const rightCustomMenu = document.querySelector('.svg-custom-menu');
 			if(manualink==false){
-			rightCustomMenu.innerHTML = `<li class="svg-menu-item5-${locid} svg-menu-item">Blend</li><li class="svg-menu-item6-${locid} svg-menu-item">Multi-Blend</li>`}
+			rightCustomMenu.innerHTML = `<li class="svg-menu-item-${locid} svg-menu-item">Show Relevant Text</li><li class="svg-menu-item1-${locid} svg-menu-item1">Submit as Answer</li><li class="svg-menu-item2-${locid} svg-menu-item">iTrace</li><li class="svg-menu-item3-${locid} svg-menu-item3">Create/Delete V2</li><li class="svg-menu-item4-${locid} svg-menu-item">Pull nodes</li><li class="svg-menu-item4-${locid} svg-menu-item">Pull nodes to border</li><li class="svg-menu-item4-${locid} svg-menu-item">Pull nodes to main focus</li>`}
 			
 			else{
 			rightCustomMenu.innerHTML = `<li class="svg-menu-item-${locid} svg-menu-item">Show Relevant Text</li><li class="svg-menu-item1-${locid} svg-menu-item">Link To This</li><li class="svg-menu-item2-${locid} svg-menu-item">iTrace</li><li class="svg-menu-item3-${locid} svg-menu-item">Create/Delete Clone V2</li><li class="svg-menu-item4-${locid} svg-menu-item">Call nodes</li>`}
 			rightCustomMenu.style.display = 'block';
             rightCustomMenu.style.left = event.clientX + 'px';
             rightCustomMenu.style.top = event.clientY + 'px';
-		
-		
-			document.querySelector(`.svg-menu-item5-${locid}`).addEventListener('click', function(e) {
-				document.querySelector('.svg-custom-menu').style.display = 'none';
+			
+			
+			document.querySelector('.svg-menu-item3').style.display = 'none';
+			document.querySelector('.svg-menu-item').style.display = 'none';
+			document.querySelector('.svg-menu-item1').style.display = 'none';
+				
+			
+			document.querySelector(`.svg-menu-item-${locid}`).addEventListener('click', function(e) {				// Right click handle show relevant text
+            document.querySelector('.svg-custom-menu').style.display = 'none';
+			  
+			  for(var i=0; i<ids.length;i++)
+			  {
 
-				let boardg = d3.select('#line-canvas');
-    let blender = boardg.append("circle")
-        .attr("r", 15)     
-        .attr("cx", x1Loc)
-        .attr("cy", y1Loc)
-        .attr("id", function(d,i) { return 'blend'+nameid; })
-        .style("fill", "blue")
-        .style("stroke", "black")
-        .style("stroke-width", "2px")
-        .attr('trail', false)
-        .attr('constrained', true)
-        .call(d3.drag()
-            .on("start", dragStart)
-            .on("drag", dragged)
-            .on("end", dragEnd))
-        .on('click', toggleConstraint);
+				scontent = ids[i].docText;
+				sid = ids[i].docId;
+				
+				scontent = scontent.replace(loc, `<span class=highlighted-text>${loc}</span>`);
 
-
-    const svg = document.querySelector('#bubbleMap');
-
-    const svgBounds = {
-        width: svg.clientWidth || svg.parentNode.clientWidth,
-        height: svg.clientHeight || svg.parentNode.clientHeight
-    };
-
-  function toggleConstraint() {
-        let circle = d3.select(this);
-        let isConstrained = circle.attr('constrained') === 'true';
-        circle.attr('constrained', !isConstrained)
-             .style("stroke", isConstrained ? "red" : "black");
-    }
-
-    function dragStart() {
-        // No need to initialize bounds since they're already set
-    }
-
-    function dragged() {
-        const circle = d3.select(this);
-        const isConstrained = circle.attr('constrained') === 'true';
-        const radius = parseFloat(circle.attr("r"));
-        
-        // Get mouse position using d3.event
-        let mouseX = d3.event.x;
-        let mouseY = d3.event.y;
-        
-        if (isConstrained) {
-            // Constrain the coordinates within the boundaries
-            mouseX = Math.max(radius+10, Math.min(svgBounds.width - radius+400, mouseX));
-            mouseY = Math.max(radius+40, Math.min(svgBounds.height - radius+260, mouseY));
-        }
-        
-        // Update circle position
-        circle
-            .attr("cx", mouseX)
-            .attr("cy", mouseY);
-    }
-
-    function dragEnd() {
-        // Optional: Add any cleanup or final position adjustments here
-    }
+				if(loc=="Virginia")
+				{
+					let loc = "VA";
+					scontent = scontent.replace(loc, `<span class=highlighted-text>${loc}</span>`);
+				}																						//create the selected document view
+              var note = `
+              <div class="reldoc note the-node" id='`+ sid +`' style="z-index: 999;">
+                <div class='close_note'>X</div>
+                <h3>`+ sid +' '+loc +`&nbsp;
+				<label class="switch">
+				  <input type="checkbox" id="movefixm`+sid+`">
+				  <span class="slider round"></span>																	
+				</label></h3>
+                <p style="cursor:text;">
+                  `+ scontent +`
+                </p>
+              </div>
+              `;
+              $("#board").append(note);
+              $(".note#" + sid).css('z-index',99).draggable({
+                containment: "#board",
+                grid: [5, 5],
+                cancel: "p"
+              });
+			  
+			$("#movefixm"+sid).on("change", function(e){
+			if(document.getElementById("movefixm"+sid).checked){										//movefix for the selected view
+				document.getElementById(sid).ondragstart = function() { return false; };
+			}
+			else{
+				document.getElementById(sid).ondragstart = function() { return true; };
+			};
+		  })
 
 
+              let x2Loc = parseFloat($('#' + sid).css('left').split('px')[0]) + $('#' + sid).find('.highlighted-text').position().left+5;
+              let y2Loc = parseFloat($('#' + sid).css('top').split('px')[0]) + $('#' + sid).find('.highlighted-text').position().top + 40;
+
+              bubbleToTextCollection.push({
+                source : {																			//map to text view
+                  id: "bubble-map",
+				  ele:locid,
+                  xOffset : x1Loc,
+                  yOffset : y1Loc
+                },
+                target : {
+                  id: "highlight-text",
+				  ele:sid,
+                  xOffset : x2Loc,
+                  yOffset : y2Loc
+                }
+              });
+
+              connections1bt.push({ source: ele, sourceid:locid, target: $('#' + sid), targetid:sid, boxElement: 'bubblemap-box' });
+			  $('#' + sid).addClass('selectedmap');
+
+              drawPolyLineMap(bubbleToTextCollection);
+
+			  $('#' + sid).on('drag', function() {
+                bubbleToTextCollection = [];
+                connections1bt.forEach(conn => {
+                 const ele = conn.source;
+				 
+				 let sid = conn.target[0].id;
+				
+			domRect = ele.getBoundingClientRect();
+			let x1Loc = domRect.x-document.getElementById('leftplace').offsetWidth+5;
+			let y1Loc = domRect.y+5;
+				
+            //      let x1Loc = parseFloat($('.bubblemap-box').css('left').split('px')[0]) + ele.getBBox().x + ele.getBBox().width+5;
+            //      let y1Loc = parseFloat($('.bubblemap-box').css('top').split('px')[0]) + ele.getBBox().y + (ele.getBBox().height/2) + 40;
+                  let x2Loc = parseFloat(conn.target.css('left').split('px')[0]) + conn.target.find('.highlighted-text').position().left+5;
+                  let y2Loc = parseFloat(conn.target.css('top').split('px')[0]) + conn.target.find('.highlighted-text').position().top + 40;
+
+                  bubbleToTextCollection.push({
+                    source : {
+                      id: "bubble-map",
+					  ele:ele.getAttribute('map-id'),
+                      xOffset : x1Loc,
+                      yOffset : y1Loc
+                    },
+                    target : {
+                      id: "highlight-text",
+					  ele: sid,
+                      xOffset : x2Loc,
+                      yOffset : y2Loc
+                    }
+                  });
+                })
+				
+                drawPolyLineMap(bubbleToTextCollection);
+			  })}
 			})
 			
+			
+			document.querySelector(`.svg-menu-item1-${locid}`).addEventListener('click', function(e) {				// Right click handle submit as answer and link to this
+            document.querySelector('.svg-custom-menu').style.display = 'none';
+				
+			let track = ["MapView",label,1,new Date(),"submit"];
+			tracker.push(track);
+			submitted.push(label);
+			d3.select("#submitelements").text(onlyUnique(submitted));
+			var study = 1;
+			if(study == 0){
+			if(manualink==false)
+			{
+				manualinksource.push(ele);
+				manualink=true;
+			}
+			else
+			{
+				ele2 = manualinksource[0];
+
+				if(ele==ele2)
+				{
+					console.log('Error')																	//bubble to manual view 
+					
+				}
+				else
+				{
+				var domRect2 = ele2.getBoundingClientRect();
+				let x2Loc = domRect2.x-document.getElementById('leftplace').offsetWidth+5;
+				let y2Loc = domRect2.y+5;			
+				let sid = ele2.getAttribute('id');
+				
+				bubbleToManCollection.push({
+                    source : {
+                      id: "bubble-map",
+					  ele: ele,
+                      xOffset : x1Loc,
+                      yOffset : y1Loc
+                    },
+                    target : {
+                      id: "manual",
+					  ele: sid,
+                      xOffset : x2Loc,
+                      yOffset : y2Loc
+                    }
+                  });
+				connections1bman.push({source:ele,target:ele2,tarid:sid,boxElement:'bubblemap-box'});
+				drawPolyLineMap(bubbleToManCollection);				
+				
+				manualink=false; manualinksource=[];
+				}
+			}
+			
+			}
+			})
+			
+
+			document.querySelector(`.svg-menu-item2-${locid}`).addEventListener('click', function(e) { 				// Right click handle Map element for iTrace
+           
+		    document.querySelector('.svg-custom-menu').style.display = 'none';
+			let track = ["MapView",label,2,new Date(),"click"];
+			tracker.push(track);
+			let boardg = d3.select('#line-canvas');
+			cloned = ele.getAttribute('cloned');	
+
+			if (cloned == 'false'){																		// if there is no clone before
+					
+			boardg.append("circle")
+                                .attr("r", 25) 															//create a clone for the element
+                                .attr("cx", x1Loc)
+                                .attr("cy", y1Loc)
+								.attr("id",function(d,i){return 'clone'+nameid;})
+								.attr("class",'clones')
+                                .style("fill", "white")
+                                .style("stroke", "green")
+                                .style("stroke-width", "2px")
+								.style("position","fixed")
+								.attr('trail',false)
+								.attr('clicked',false)
+								.on("mouseup",cloneclick)
+								.on("click",clonelclick)						//click event
+								.call(d3.drag()									//drag event
+								.on("start",dragstart)
+								.on("drag", dragged)
+								.on("end", dragended));
+			boardg.append("rect")
+                                .attr("width", 50)
+                                .attr("height", 15)
+                                .attr("x", x1Loc-25)
+                                .attr("y", y1Loc-45)								
+								.attr("id",function(d,i){return 'progclonere'+nameid;})			//creating the progress bars. This is the complete bar
+                                .style("fill", "grey")
+                                .style("stroke", "black")
+                                .style("stroke-width", "1px");
+			boardg.append("rect")
+                                .attr("width", 0)
+                                .attr("height", 15)
+                                .attr("x", x1Loc-25)
+                                .attr("y", y1Loc-45)								
+								.attr("id",function(d,i){return 'progclone2'+nameid;})			//creating the second progress bar which shows progress traversed
+                                .style("fill", "red")
+                                .style("stroke", "black")
+                                .style("stroke-width", "1px");
+								
+			boardg.append("text")
+				.attr("x", x1Loc-10)
+				.attr("y", y1Loc-38)
+				.attr("dy", ".35em")
+				.attr("id",function(d,i){return 'progtextre'+nameid;})					//create a text to display the percentage traversed
+				.style("fill", "white")
+				.text('0%');
+											
+			
+			let selectedesign = document.getElementById("lineguider").value;		//check the selected design
+			if(selectedesign == "design1"){											
+
+			boardg.append("circle")
+                                .attr("r", 1) 												// create the progress circle inside the clone
+                                .attr("cx", x1Loc)
+                                .attr("cy", y1Loc)
+								.attr("id",function(d,i){return 'progcloneci'+nameid;})
+                                .style("fill", "red")
+                                .style("stroke", "green")
+                                .style("stroke-width", "1px")
+								.attr('trail',false)
+								.on("mouseup",cloneclick())
+								.call(d3.drag()
+								.on("start",dragstart)
+								.on("drag", dragged)
+								.on("end", dragended));								
+
+			boardg.append("text")
+				.attr("x", x1Loc-10)
+				.attr("y", y1Loc)
+				.attr("dy", ".35em")														//create a text to display the percentage traversed
+				.attr("id",function(d,i){return 'progtextci'+nameid;})
+				.style("fill", "black")
+				.text('0%');
+			}
+			
+			else if(selectedesign == "design2"){
+			boardg.append("rect")
+                                .attr("width", 50)
+                                .attr("height", 15)
+                                .attr("x", x1Loc-25)
+                                .attr("y", y1Loc-45)								
+								.attr("id",function(d,i){return 'progclonere'+nameid;})			//creating the progress bars. This is the complete bar
+                                .style("fill", "grey")
+                                .style("stroke", "black")
+                                .style("stroke-width", "1px")
+								.style("opacity", "100");
+			boardg.append("rect")
+                                .attr("width", 0)
+                                .attr("height", 15)
+                                .attr("x", x1Loc-25)
+                                .attr("y", y1Loc-45)								
+								.attr("id",function(d,i){return 'progclone2'+nameid;})			//creating the second progress bar which shows progress traversed
+                                .style("fill", "red")
+                                .style("stroke", "black")
+                                .style("stroke-width", "1px");
+								
+			boardg.append("text")
+				.attr("x", x1Loc-10)
+				.attr("y", y1Loc-38)
+				.attr("dy", ".35em")
+				.attr("id",function(d,i){return 'progtextre'+nameid;})					//create a text to display the percentage traversed
+				.style("fill", "white")
+				.text('0%');
+			}
+			
+			ele.setAttribute('cloned','true');	 // set cloned attribute to true so duplicate is not created
+			}
+			else									// if clone is created then remove the clone and other associated elements
+			{
+				let el = document.getElementById('clone'+nameid);
+				let trailel = document.getElementsByClassName("trail"+nameid);							
+				el.remove(); 															// remove clone element
+																						// based on the design selected handle to remove elements
+				if (selectedesign=='design1'){
+					let prtext = document.getElementById('progtextci'+nameid);
+					let prcirc = document.getElementById('progcloneci'+nameid);
+					prtext.remove();
+					prcirc.remove();
+				}
+				if (selectedesign=='design2'){
+					let prtext = document.getElementById('progclonere'+nameid);
+					let prcirc = document.getElementById('progclone2'+nameid);
+					let prtre = document.getElementById('progtextre'+nameid);
+					prtext.remove();
+					prcirc.remove();
+					prtre.remove();
+				}
+				if(selectedesign=='design3'){
+					$("[id^='progress"+nameid+"']").remove();					
+				}
+				if(selectedesign=='design4'){
+					$("[id^='dupcirc"+nameid+"']").remove();						
+				}
+
+			ele.setAttribute('cloned','false');											//set cloned attribute to false so clone can be created next time.
+			}
+		  
+		var mpid,mgpid,scale=1;
+
+		function dragged(d) {								//handle dragging event of clone
+
+			var m = d3.mouse(this)
+			var x = document.getElementsByClassName("link-newbg "+nameid);						// check the links from the clicked element to graph view
+			var z = document.getElementsByClassName("link-newbo "+nameid);						// check the links from the clicked element to organization view
+			var y = document.getElementsByClassName("link-newbom "+nameid);					 	// check the links from the clicked element to Org-map cluster view		
+			var w = document.getElementsByClassName("link-newbgm "+nameid);						// check the links from the clicked element to map-graph cluster view
+			var xx = document.getElementsByClassName("link-newbmog "+nameid);					// check the links from the clicked element to tricluster view
+
+			var otherLinks = getOtherLinks(nameid);
+			
+			highlightline(x);
+			highlightline(z);
+			highlightline(y);
+			highlightline(w);																// when dragged highlight all the lines connecting from element to other views
+			highlightline(xx);
+					
+			try{var clp = closestPoint(x[0],m);	mgpid='m'; mpid=x[0].getAttribute('id').slice(3);}				//get the closest line from the dragging position for the clone element
+			catch{var clp = closestPoint(z[0],m);	mgpid='g';mpid=z[0].getAttribute('id').slice(3)}			//this value is just to compare in order to get the closest point for the clone element.
+			
+			for(var i=0;i<x.length;i++)											// handle dragging clone element on the link to graph view
+			{
+			let clp2 = closestPoint(x[i],m);			
+			let pid = x[i].getAttribute('id').slice(3);		
+			
+			tar = x[i].getAttribute('tar');
+			
+			var elelabel = document.getElementById('map'+nameid).getAttribute('label');
+			var tarlabel = document.getElementById(tar).getAttribute('data-name');
+
+			if(!(document.getElementById("trail"+nameid+'m'+pid))){											//check if trail circle for the line is created. If not create a trail circ
+
+			let trailcirc = boardg.append("circle")
+                                .attr("r", 10) 	
+                                .attr("cx", clp2[0])
+                                .attr("cy", clp2[1])	
+								.attr("id",function(d,i){return 'trail'+nameid+'m'+pid;})						//create a trailing circle for lines from map element to graph view
+								//.style('visibility',"hidden")
+								.attr("class","trail"+nameid)
+                                .style("fill", "purple")
+                                .style("stroke", "black")
+                                .style("stroke-width", "2px")
+								.style("opacity",0.4)
+								.attr("label", elelabel+"---"+tarlabel)
+								.on("mouseover", function(d){tooltip3.text(event.target.getAttribute('label'));return tooltip3.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip3.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})				//handle mouse click, hover elements
+								.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})																		
+			}
+			else																				// if trail circle is created for the line
+			{
+				let dist = parseInt(x[i].getTotalLength()*scale)
+				//console.log(dist)
+				let chp = x[i].getPointAtLength(dist);
+				//console.log(chp);
+				let el = document.getElementById('trail'+nameid+'m'+pid);						//handle the movement based on dragging of cloned element
+				el.style.opacity ="0.4";
+				el.setAttribute('cx',chp['x']+6);
+				el.setAttribute('cy',chp['y']+4);				
+				
+			}
 		
-document.querySelector(`.svg-menu-item6-${locid}`).addEventListener('click', function(e) {
+			if(clp.distance>clp2.distance){														//check which is the closest distance for the cloned element and appropriately handle the change
+					clp=clp2;
+					mpid = pid;
+					mgpid='m'
+				}
+			}
+
+			for(var i=0;i<z.length;i++)												// handle dragging clone element on the link to organization view
+			{
+			let clp2 = closestPoint(z[i],m);			
+			let pid = z[i].getAttribute('id').slice(3);
+
+			tar = z[i].getAttribute('tar');
+
+			var elelabel = document.getElementById('map'+nameid).getAttribute('label');
+			var tarlabel = document.getElementById(tar).getAttribute('orgname');			
+			
+			if(!(document.getElementById("trail"+nameid+'g'+pid))){						//check if trail circle for the line is created. If not create a trail circ
+
+			let trailcirc = boardg.append("circle")
+                                .attr("r", 10) 	
+                                .attr("cx", clp2[0])
+                                .attr("cy", clp2[1])
+								.attr("id",function(d,i){return 'trail'+nameid+'g'+pid;})
+								.attr("class","trail"+nameid)
+                                .style("fill", "#0ca4ff")
+                                .style("stroke", "black")
+                                .style("stroke-width", "2px")
+								.style("opacity",0.4)
+								.attr("label", elelabel+"---"+tarlabel)
+								.on("mouseover", function(d){tooltip3.text(event.target.getAttribute('label'));return tooltip3.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip3.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+								.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})																
+			}
+			else																		// if trail circle is created for the line
+			{
+				let dist = parseInt(z[i].getTotalLength()*scale)
+				let chp = z[i].getPointAtLength(dist);
+				let el = document.getElementById('trail'+nameid+'g'+pid);							//handle the movement based on dragging of cloned element
+				el.style.opacity ="0.4";
+
+				el.setAttribute('cx',chp['x']);
+				el.setAttribute('cy',chp['y']);				
+				
+			}
+
+				if(clp.distance>clp2.distance){
+					clp=clp2;									//checking which line the cloned element is closest to and appropriately handling the change
+					mpid = pid;
+					mgpid= 'g'
+				}
+			}
+			
+			for(var i=0;i<y.length;i++)											// handle dragging clone element on the link to org-map cluster view
+			{
+			let clp2 = closestPoint(y[i],m);			
+			let pid = y[i].getAttribute('id').slice(4);		
+			
+			var elelabel = document.getElementById('map'+nameid).getAttribute('label');
+			var tarlabel = document.getElementById(tar).getAttribute('orgname');	
+			
+			if(!(document.getElementById("trail"+nameid+'n'+pid))){				//check if trail circle for the line is created. If not create a trail circ
+
+			let trailcirc = boardg.append("circle")
+                                .attr("r", 10) 	
+                                .attr("cx", clp2[0])
+                                .attr("cy", clp2[1])
+								.attr("id",function(d,i){return 'trail'+nameid+'n'+pid;})
+								.attr("class","trail"+nameid)
+                                .style("fill", "green")
+                                .style("stroke", "black")
+                                .style("stroke-width", "2px")
+								.style("opacity",0.4)
+								.attr("label", elelabel+"---"+tarlabel)
+								.on("mouseover", function(d){tooltip3.text(event.target.getAttribute('label'));return tooltip3.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip3.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+								.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})																	
+			}
+			else																// if trail circle is created for the line
+			{
+				let dist = parseInt(y[i].getTotalLength()*scale)
+				let chp = y[i].getPointAtLength(dist);
+				let el = document.getElementById('trail'+nameid+'n'+pid);
+								el.style.opacity ="0.4";
+
+				el.setAttribute('cx',chp['x']);
+				el.setAttribute('cy',chp['y']);				
+				
+			}
+				if(clp.distance>clp2.distance){
+					clp=clp2;
+					mpid = pid;
+					mgpid='n'
+				}
+			}
+
+			for(var i=0;i<w.length;i++)											// handle dragging clone element on the link to map-graph cluster view
+			{
+			let clp2 = closestPoint(w[i],m);			
+			let pid = w[i].getAttribute('id').slice(4);
+			
+			
+			if(!(document.getElementById("trail"+nameid+'l'+pid))){
+
+			let trailcirc = boardg.append("circle")
+                                .attr("r", 10) 	//get radius from targetCircle and also styles?
+                                .attr("cx", clp2[0])
+                                .attr("cy", clp2[1])
+								.attr("id",function(d,i){return 'trail'+nameid+'l'+pid;})
+								.attr("class","trail"+nameid)
+                                .style("fill", "black")
+                                .style("stroke", "black")
+                                .style("stroke-width", "2px")
+								.style("opacity",0.4)
+								.attr("label", elelabel+"---"+tarlabel)
+								.on("mouseover",trailclonehover)
+								.on("mouseout",trailcloneout)																		
+			}
+			else
+			{
+				let dist = parseInt(w[i].getTotalLength()*scale)
+				let chp = w[i].getPointAtLength(dist);
+				let el = document.getElementById('trail'+nameid+'l'+pid);
+				el.style.opacity ="0.4";
+				
+				el.setAttribute('cx',chp['x']);
+				el.setAttribute('cy',chp['y']);				
+				
+			}
+				if(clp.distance>clp2.distance){
+					clp=clp2;
+					mpid = pid;
+					mgpid= 'l'
+				}
+			}
+
+			for(var i=0;i<xx.length;i++)										// handle dragging clone element on the link to tricluster view
+			{
+			let clp2 = closestPoint(xx[i],m);			
+			let pid = xx[i].getAttribute('id').slice(5);
+			
+			if(!(document.getElementById("trail"+nameid+'c'+pid))){
+
+			let trailcirc = boardg.append("circle")
+                                .attr("r", 10) 	
+                                .attr("cx", clp2[0])
+                                .attr("cy", clp2[1])
+								.attr("id",function(d,i){return 'trail'+nameid+'c'+pid;})
+								.attr("class","trail"+nameid)
+                                .style("fill", "yellow")
+                                .style("stroke", "black")
+                                .style("stroke-width", "2px")
+								.style("opacity",0.4)
+								.attr("label", elelabel+"---"+tarlabel)
+								.on("mouseover",trailclonehover)
+								.on("mouseout",trailcloneout)																		
+			}
+			else
+			{
+				let dist = parseInt(xx[i].getTotalLength()*scale)
+				let chp = xx[i].getPointAtLength(dist);
+				let el = document.getElementById('trail'+nameid+'c'+pid);
+				el.style.opacity ="0.4";
+				
+				el.setAttribute('cx',chp['x']);
+				el.setAttribute('cy',chp['y']);				
+				
+			}
+				if(clp.distance>clp2.distance){
+					clp=clp2;
+					mpid = pid;
+					mgpid= 'c'
+				}
+			}
+						
+			d3.select("#clone"+nameid).attr("cx", clp[0]).attr("cy",clp[1]);										//change the position of the cloned element based on drag and closest line point
+			try{document.getElementById("trail"+nameid+mgpid+mpid).style.opacity ="0.1";}//.outerHTML = "";}								
+			catch(e){console.log('k');}
+			
+		//	document.getElementById('clone'+nameid).setAttribute('cx',clp[0]);
+		//	document.getElementById('clone'+nameid).setAttribute('cy',clp[1]);	
+			let selectedesign = document.getElementById("lineguider").value;
+
+			document.getElementById('progclone2'+nameid).setAttribute('x',clp[0]-25);
+			document.getElementById('progclone2'+nameid).setAttribute('y',clp[1]-45);				
+			document.getElementById('progclonere'+nameid).setAttribute('x',clp[0]-25);
+			document.getElementById('progclonere'+nameid).setAttribute('y',clp[1]-45);			
+			document.getElementById('progtextre'+nameid).setAttribute('x',clp[0]-10);
+			document.getElementById('progtextre'+nameid).setAttribute('y',clp[1]-38);				
+			document.getElementById('progclone2'+nameid).setAttribute('width',scale*50);
+			document.getElementById('progtextre'+nameid).textContent=parseInt(scale*100+1.5)+'%';
+			var currentProgress = parseInt(scale * 110);
+			var decreasingPercentage = 100 - currentProgress-0.5;
+			var opacity = decreasingPercentage / 100;
+			adjustLinkTransparency(otherLinks, opacity);
+			updateCircleAndDetectPath(); // Check every 100ms
+
+			//adjustLinkTransparency(otherLinks, scale*50-0.5); // Set opacity to 50%
+			if(selectedesign == "design1"){										//handle position change of elements while dragging cloned element for different designs
+			//	document.getElementById('progcloneci'+nameid).addEventListener("mouseup",cloneclick())
+			
+			document.getElementById('progcloneci'+nameid).setAttribute('cx',clp[0]);
+			document.getElementById('progcloneci'+nameid).setAttribute('cy',clp[1]);
+			document.getElementById('progtextci'+nameid).setAttribute('x',clp[0]-10);
+			document.getElementById('progtextci'+nameid).setAttribute('y',clp[1]);				
+			document.getElementById('progcloneci'+nameid).setAttribute('r',scale*25);
+			document.getElementById('progtextci'+nameid).textContent=parseInt(scale*100+0.5)+'%';
+			}
+			else if(selectedesign == "design2")
+			{
+			document.getElementById('progclone2'+nameid).setAttribute('x',clp[0]-25);
+			document.getElementById('progclone2'+nameid).setAttribute('y',clp[1]-45);				
+			document.getElementById('progclonere'+nameid).setAttribute('x',clp[0]-25);
+			document.getElementById('progclonere'+nameid).setAttribute('y',clp[1]-45);			
+			document.getElementById('progtextre'+nameid).setAttribute('x',clp[0]-10);
+			document.getElementById('progtextre'+nameid).setAttribute('y',clp[1]-38);				
+			document.getElementById('progclone2'+nameid).setAttribute('width',scale*50);
+			document.getElementById('progtextre'+nameid).textContent=parseInt(scale*100+0.5)+'%';
+			}
+
+			
+			if(mgpid=='m'){														//based on the current line that the cloned element is placed at handle the design changes for design 3 and 4
+				let path = document.getElementsByClassName("link-newbg "+nameid+' '+mpid)[0];
+				try{let cpoint = [this.getAttribute('cx'),this.getAttribute('cy')];
+				let dist = getDistance(cpoint[0],cpoint[1],path.getPointAtLength(0)['x'],path.getPointAtLength(0)['y']);
+				scale = parseFloat(dist/path.getTotalLength());	
+				document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';
+				var length = path.getTotalLength();			
+
+			if(selectedesign=="design3"){										//for design 3 create a trailing point line
+			$("[id^='progress"+nameid+"']").remove();
+			for(var jk = 0;jk<dist;jk+=10)
+			{
+			boardg.append("circle")
+                                .attr("r", 4*jk/length) 	
+                                .attr("cx", path.getPointAtLength(jk)['x'])
+                                .attr("cy", path.getPointAtLength(jk)['y'])
+								.attr("id",function(d,i){return 'progress'+nameid;})
+                                .style("fill", "green")
+								.style("stroke", "black")
+                                .style("stroke-width", "2px");
+  			}}
+			else if(selectedesign=="design4"){									//for design 4 create a duplicate line 
+				
+				createdup(path);
+
+				for(var ii=0;ii<path.getTotalLength();ii+=2)
+				{
+					let id = String('dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2));
+					if(cpoint[0] < path.getPointAtLength(ii).x)
+
+						document.getElementById(id).style.fill="none";
+					
+					else{
+						document.getElementById(id).style.fill="#ADFF2F";
+					}
+				}
+				
+			}
+			document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';
+			}
+			catch(e){console.log('');}		
+			}
+			else{
+			if(mgpid=='g'){														//handle design changes for lines that the cloned element is placed at
+				let path = document.getElementsByClassName("link-newbo "+nameid+' '+mpid)[0];
+				let cpoint = [this.getAttribute('cx'),this.getAttribute('cy')];
+				let dist = getDistance(cpoint[0],cpoint[1],path.getPointAtLength(0)['x'],path.getPointAtLength(0)['y']);
+				scale = parseFloat(dist/path.getTotalLength());	
+			var length = path.getTotalLength();			
+				
+			if(selectedesign=="design3"){
+			$("[id^='progress"+nameid+"']").remove();
+			for(var jk = 0;jk<dist;jk+=10)
+			{
+				
+			boardg.append("circle")
+                                .attr("r", 4*jk/length) 	
+                                .attr("cx", path.getPointAtLength(jk)['x'])
+                                .attr("cy", path.getPointAtLength(jk)['y'])
+								.attr("id",function(d,i){return 'progress'+nameid;})
+                                .style("fill", "green")
+								.style("stroke", "black")
+                                .style("stroke-width", "2px");
+  			}}
+			else if(selectedesign=="design4"){
+				
+				createdup(path);
+
+
+				for(var ii=0;ii<path.getTotalLength();ii+=2)
+				{
+					let id = String('dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2));
+					if(cpoint[0] > path.getPointAtLength(ii).x)
+
+						document.getElementById(id).style.fill="none";
+					
+					else{
+						document.getElementById(id).style.fill="#ADFF2F";
+					}
+				}
+				
+			}			
+				document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';
+
+			}
+			else{
+			if(mgpid=='n'){
+				let path = document.getElementsByClassName("link-newbom "+nameid+' '+mpid)[0];
+				let cpoint = [this.getAttribute('cx'),this.getAttribute('cy')];
+				let dist = getDistance(cpoint[0],cpoint[1],path.getPointAtLength(0)['x'],path.getPointAtLength(0)['y']);
+				scale = parseFloat(dist/path.getTotalLength());	
+				var length = path.getTotalLength();			
+				
+			if(selectedesign=="design3"){
+			$("[id^='progress"+nameid+"']").remove();
+			for(var jk = 0;jk<dist;jk+=10)
+			{				
+			boardg.append("circle")
+                                .attr("r", 4*jk/length) 	
+                                .attr("cx", path.getPointAtLength(jk)['x'])
+                                .attr("cy", path.getPointAtLength(jk)['y'])
+								.attr("id",function(d,i){return 'progress'+nameid;})
+                                .style("fill", "green")
+								.style("stroke", "black")
+                                .style("stroke-width", "2px");
+  			}}
+			else if(selectedesign=="design4"){
+				
+				createdup(path);
+
+
+				for(var ii=0;ii<path.getTotalLength();ii+=2)
+				{
+					let id = String('dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2));
+					if(cpoint[0] < path.getPointAtLength(ii).x)
+
+						document.getElementById(id).style.fill="none";
+					
+					else{
+						document.getElementById(id).style.fill="#ADFF2F";
+					}
+				}
+				
+			}			
+				document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';				
+			}
+			else{
+			if(mgpid=='l'){
+				let path = document.getElementsByClassName("link-newbgm "+nameid+' '+mpid)[0];
+				let cpoint = [this.getAttribute('cx'),this.getAttribute('cy')];
+				let dist = getDistance(cpoint[0],cpoint[1],path.getPointAtLength(0)['x'],path.getPointAtLength(0)['y']);
+				scale = parseFloat(dist/path.getTotalLength());	
+	var length = path.getTotalLength();			
+				
+			if(selectedesign=="design3"){
+			$("[id^='progress"+nameid+"']").remove();
+			for(var jk = 0;jk<dist;jk+=10)
+			{
+				
+			boardg.append("circle")
+                                .attr("r", 4*jk/length) 	
+                                .attr("cx", path.getPointAtLength(jk)['x'])
+                                .attr("cy", path.getPointAtLength(jk)['y'])
+								.attr("id",function(d,i){return 'progress'+nameid;})
+                                .style("fill", "green")
+								.style("stroke", "black")
+                                .style("stroke-width", "2px");
+  			}}
+			else if(selectedesign=="design4"){
+				
+				createdup(path);
+
+
+				for(var ii=0;ii<path.getTotalLength();ii+=2)
+				{
+					let id = String('dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2));
+					if(cpoint[0] < path.getPointAtLength(ii).x)
+
+						document.getElementById(id).style.fill="none";
+					
+					else{
+						document.getElementById(id).style.fill="#ADFF2F";
+					}
+				}
+				
+			}			
+				document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';				
+			}
+			else{
+			if(mgpid=='c'){
+				let path = document.getElementsByClassName("link-newbmog "+nameid+' '+mpid)[0];
+				let cpoint = [this.getAttribute('cx'),this.getAttribute('cy')];
+				let dist = getDistance(cpoint[0],cpoint[1],path.getPointAtLength(0)['x'],path.getPointAtLength(0)['y']);
+				scale = parseFloat(dist/path.getTotalLength());	
+			var length = path.getTotalLength();			
+				
+			if(selectedesign=="design3"){
+			$("[id^='progress"+nameid+"']").remove();
+			
+			for(var jk = 0;jk<dist;jk+=10)
+			{
+			boardg.append("circle")
+                                .attr("r", 4*jk/length) 	
+                                .attr("cx", path.getPointAtLength(jk)['x'])
+                                .attr("cy", path.getPointAtLength(jk)['y'])
+								.attr("id",function(d,i){return 'progress'+nameid;})
+                                .style("fill", "green")
+								.style("stroke", "black")
+                                .style("stroke-width", "2px");
+  			}}
+			else if(selectedesign=="design4"){
+				
+				createdup(path);
+
+
+				for(var ii=0;ii<path.getTotalLength();ii+=2)
+				{
+					let id = String('dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2));
+					if(cpoint[0] < path.getPointAtLength(ii).x)
+
+						document.getElementById(id).style.fill="none";
+					
+					else{
+						document.getElementById(id).style.fill="#ADFF2F";
+					}
+				}
+				
+			}			
+				document.getElementById(path.getAttribute('id')).style.stroke = '#FFEA00';			}
+			
+		}}}}}
+			
+		//reDrawLines();	
+
+		var duprecords = [];
+		function createdup(path){									//create a duplicate line for design 4
+			
+				if(duprecords.includes(path.getAttribute('id')))
+					return;
+				
+				duprecords.push(path.getAttribute('id'));
+				
+				for(var ii=0;ii<path.getTotalLength();ii++)
+				{
+					
+				boardg.append("circle")
+                              .attr("r", 1) 
+                                .attr("cx", path.getPointAtLength(ii).x)
+                                .attr("cy", path.getPointAtLength(ii).y)
+								.attr("id",function(d,i){return 'dupcirc'+nameid+path.getAttribute('id')+path.getPointAtLength(ii).x.toFixed(2);})
+								.attr("class","dupcirc")
+                                .style("fill", "none")
+                                .style("stroke", "none")
+				
+				}
+				return 0;
+			
+		}
+	
+		function getDistance(x1, y1, x2, y2){						// basic function to get distance between points
+			let y = x2 - x1;
+			let x = y2 - y1;
+			
+			return Math.sqrt(x * x + y * y);
+		}
+			
+		function closestPoint(pathNode, point) {					//function for closest point for moving cloned element
+			  var pathLength = pathNode.getTotalLength(),
+				  precision = 8,
+				  best,
+				  bestLength,
+				  bestDistance = Infinity;
+
+			  
+			  for (var scan, scanLength = 0, scanDistance; scanLength <= pathLength; scanLength += precision) {
+				if ((scanDistance = distance2(scan = pathNode.getPointAtLength(scanLength))) < bestDistance) {						// linear scan for approximation
+				  best = scan, bestLength = scanLength, bestDistance = scanDistance;
+				}
+			  }
+
+			  
+			  precision /= 2;
+			  while (precision > 0.5) { 																// binary search for precise estimate
+				var before,
+					after,
+					beforeLength,									
+					afterLength,
+					beforeDistance,
+					afterDistance;
+				if ((beforeLength = bestLength - precision) >= 0 && (beforeDistance = distance2(before = pathNode.getPointAtLength(beforeLength))) < bestDistance) {	
+				  best = before, bestLength = beforeLength, bestDistance = beforeDistance;
+				} else if ((afterLength = bestLength + precision) <= pathLength && (afterDistance = distance2(after = pathNode.getPointAtLength(afterLength))) < bestDistance) {
+				  best = after, bestLength = afterLength, bestDistance = afterDistance;
+				} else {
+				  precision /= 2;
+				}
+			  }
+
+			  best = [best.x, best.y];
+			  best.distance = Math.sqrt(bestDistance);
+			  return best;
+
+			  function distance2(p) {
+				var dx = p.x - point[0],
+					dy = p.y - point[1];
+				return dx * dx + dy * dy;
+			  }}
+	
+		function dragended(d){										//function to handle drag end of clone and handle other elements
+				
+			var x = document.getElementsByClassName("link-newbg "+nameid);
+			var z = document.getElementsByClassName("link-newbo "+nameid);
+			var y = document.getElementsByClassName("link-newbgm "+nameid);
+			var w = document.getElementsByClassName("link-newbom "+nameid);
+			var xx = document.getElementsByClassName("link-newbmog "+nameid);
+			
+			unhighlightline(x);
+			unhighlightline(z);
+			unhighlightline(y);																	//unhighlight lines
+			unhighlightline(w);			
+			unhighlightline(xx);			
+			
+			let trailcirc = document.getElementsByClassName("trail"+nameid)
+			for(var j=0;j<trailcirc.length;j++){
+				//trailcirc[j].style.display='none';
+			}
+			
+			
+			
+		}
+	
+		function dragstart(d){										//function to handle drag start of clone
+		
+		if(document.getElementsByClassName("trail"+nameid))
+			{
+				let trailcirc = document.getElementsByClassName("trail"+nameid)
+				for(var j=0;j<trailcirc.length;j++){
+					//trailcirc[j].style.display='block';
+				}		
+			}
+		}
+	
+		function highlightline(x){									//highlight lines
+			for(var i=0;i<x.length;i++)
+			{
+				let xid = String(x[i].getAttribute('id'));
+				document.getElementById(xid).style.stroke = 'red';
+				
+			}			
+		}
+
+		function getOtherLinks(elementId) {
+			// Use a more specific selector to get only path elements with 'link' in their class
+			var linkPaths = document.querySelectorAll('path[class*="link"]');
+			
+			// Use a single loop to filter paths
+			var otherPaths = [];
+			for (var i = 0; i < linkPaths.length; i++) {
+				var path = linkPaths[i];
+				if (path.getAttribute('tar') !== "per45") {
+					otherPaths.push(path);
+				}
+			}
+			
+			return otherPaths;
+		}
+	
+		function transitioning(x){									//highlight specific line
+			for(var i=0;i<x.length;i++)
+			{
+				let xid = String(x[i].getAttribute('id'));
+				document.getElementById(xid).style.stroke = 'white';
+				
+			}	
+		}
+		
+		function adjustLinkTransparency(links, opacityValue) {
+			// Ensure opacityValue is between 0 and 1
+			opacityValue = Math.max(0, Math.min(1, opacityValue));
+			
+			links.forEach(function(link) {
+				link.style.opacity = opacityValue;
+			});
+		}
+
+		function unhighlightline(x){								//unhighlight lines
+			for(var i=0;i<x.length;i++)
+			{
+				let xid = String(x[i].getAttribute('id'));
+				document.getElementById(xid).style.stroke = 'rgb(149, 199, 244)';
+				
+			}			
+		}	
+	
+		function cloneclick(){										//handle clone right click events
+			
+					if(event.button==2){
+				
+				const rightCustomMenu = document.querySelector('.svg-custom-menu');
+		
+				rightCustomMenu.innerHTML = `<li class="svg-menu-item-${nameid} svg-menu-item">Delete Clone</li><li class="svg-menu-item1-${nameid} svg-menu-item">Manual Link</li>`
+			rightCustomMenu.style.display = 'block';
+            rightCustomMenu.style.left = event.clientX + 'px';
+            rightCustomMenu.style.top = event.clientY + 'px';
+		
+		document.querySelector(`.svg-menu-item-${nameid}`).addEventListener('click', function(e) {								//handle delete clone and delete associated elements
+			
+	
+				let el = document.getElementById('clone'+nameid);
+				let trailel = document.getElementsByClassName("trail"+nameid);
+				el.remove(); 
+			let selectedesign = document.getElementById("lineguider").value;
+				
+				if (selectedesign=='design1'){
+					let prtext = document.getElementById('progtextci'+nameid);
+					let prcirc = document.getElementById('progcloneci'+nameid);
+					prtext.remove();
+					prcirc.remove();
+				}
+				if (selectedesign=='design2'){
+					let prtext = document.getElementById('progclonere'+nameid);
+					let prcirc = document.getElementById('progclone2'+nameid);
+					let prtre = document.getElementById('progtextre'+nameid);
+					prtext.remove();
+					prcirc.remove();
+					prtre.remove();
+				}
+				if(selectedesign=='design3'){
+					$("[id^='progress"+nameid+"']").remove();					
+				}
+				if(selectedesign=='design4'){
+					$("[id^='dupcirc"+nameid+"']").remove();						
+				}
+			while(trailel[0]) 
+				trailel[0].remove();
+
+			ele.setAttribute('cloned','false');	
+		})
+
+let pathId = updateCircleAndDetectPath();
+//    const originalPath = document.getElementById(pathId);
+  			if(mgpid=='m'){														
+				var path = document.getElementsByClassName("link-newbg "+nameid+' '+mpid)[0];
+			}
+			
+			if(mgpid=='g'){														
+				var path = document.getElementsByClassName("link-newbo "+nameid+' '+mpid)[0];
+			}
+
+			if(mgpid=='n'){
+				var path = document.getElementsByClassName("link-newbom "+nameid+' '+mpid)[0];
+			}	
+			
+document.querySelector(`.svg-menu-item1-${nameid}`).addEventListener('click', function(e) {
+    // Hide the custom menu
     document.querySelector('.svg-custom-menu').style.display = 'none';
-    let bubbleMap = d3.select('#bubbleMap');
-    let boardg = d3.select('#line-canvas');
+document.querySelectorAll('[id^="prog"]').forEach(element => {
+    element.style.display = 'none';
+});	
+    // Get the SVG element
+    const svg = document.querySelector('svg');
+    if (!svg) {
+        console.error('SVG element not found');
+        return;
+    }
+    // Get the circle element
+    const circle = document.getElementById('clone' + nameid);
+    if (!circle) {
+        console.error('Circle element not found');
+        return;
+    }
+    // Get the path element
 
-    const containerGroup = boardg.append('g')
-        .attr('id', `container-group-${locid}`);
-
-    // Gradient definition
-    const gradient = containerGroup.append('defs')
-        .append('linearGradient')
-        .attr('id', `container-gradient-${locid}`)
-        .attr('x1', '0%')
-        .attr('y1', '0%')
-        .attr('x2', '100%')
-        .attr('y2', '100%');
-
-    gradient.append('stop')
-        .attr('offset', '0%')
-        .attr('stop-color', '#f0f5f5')
-        .attr('stop-opacity', 1);
-
-    gradient.append('stop')
-        .attr('offset', '100%')
-        .attr('stop-color', '#e0ebeb')
-        .attr('stop-opacity', 1);
-
-    // Glow effect
-    const filter = containerGroup.append('defs')
-        .append('filter')
-        .attr('id', `glow-${locid}`);
-
-    filter.append('feGaussianBlur')
-        .attr('stdDeviation', '3.5')
-        .attr('result', 'coloredBlur');
-
-    const feMerge = filter.append('feMerge');
-    feMerge.append('feMergeNode').attr('in', 'coloredBlur');
-    feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
-
-    // Container circle
-    const containerCircle = containerGroup.append('circle')
-        .attr('cx', x1Loc)
-        .attr('cy', y1Loc)
-        .attr('r', 60)
-        .attr('fill', `url(#container-gradient-${locid})`)
-        .attr('stroke', '#6fa8dc')
-        .attr('stroke-width', 2)
-        .attr('id', `container-${locid}`)
-        .style('cursor', 'move')
-        .style('filter', `url(#glow-${locid})`);
-
-    let storedElements = [];
-
-    // Observer setup
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'clicked') {
-                const element = d3.select(mutation.target);
-                const isClicked = element.attr('clicked') === 'true';
-                
-                if (isClicked) {
-                    addElementToContainer(element);
-                } else {
-                    removeElementFromContainer(element.attr('id'));
-                }
-            }
-        });
-    });
-
-    boardg.selectAll('circle:not([id^="container-"])')
-        .each(function() {
-            observer.observe(this, { attributes: true });
-        });
-
-    const targetElement = d3.select(event.target);
-    addElementToContainer(targetElement);
-
-
-
-     function isPointInCircle(x, y, cx, cy, r) {
-        // Check if a point (x,y) is inside circle with center (cx,cy) and radius r
-        const dx = x - cx;
-        const dy = y - cy;
-        return (dx * dx + dy * dy) <= (r * r);
+    // Toggle the following state using a data attribute
+    let isFollowing = circle.dataset.following === 'true';
+    isFollowing = !isFollowing;
+    circle.dataset.following = isFollowing;
+    console.log('Circle ' + nameid + ' is following:', isFollowing);
+    // Create or get the links
+    let curvedLinkToCircle = document.getElementById('curvedLinkToCircle' + nameid);
+    let curvedLinkFromCircle = document.getElementById('curvedLinkFromCircle' + nameid);
+    if (!curvedLinkToCircle) {
+        curvedLinkToCircle = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        curvedLinkToCircle.id = 'curvedLinkToCircle' + nameid;
+        curvedLinkToCircle.setAttribute('stroke', 'green');
+        curvedLinkToCircle.setAttribute('stroke-width', '2');
+        curvedLinkToCircle.setAttribute('fill', 'none');
+        svg.appendChild(curvedLinkToCircle);
+    }
+    if (!curvedLinkFromCircle) {
+        curvedLinkFromCircle = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        curvedLinkFromCircle.id = 'curvedLinkFromCircle' + nameid;
+        curvedLinkFromCircle.setAttribute('stroke', 'green');
+        curvedLinkFromCircle.setAttribute('stroke-width', '2');
+        curvedLinkFromCircle.setAttribute('fill', 'none');
+        svg.appendChild(curvedLinkFromCircle);
     }
 
-    function calculateGridPosition(index) {
-        const elementRadius = 12;
-        const spacing = elementRadius * 2 + 2; // Element diameter plus small gap
-        const containerRadius = parseFloat(containerCircle.attr('r'));
-        const centerX = parseFloat(containerCircle.attr('cx'));
-        const centerY = parseFloat(containerCircle.attr('cy'));
-        
-        // Start from top-left quadrant of the circle
-        const startX = centerX - containerRadius + elementRadius;
-        const startY = centerY - containerRadius + elementRadius;
-        
-        // Calculate position within grid
-        let row = 0;
-        let col = 0;
-        let currentIndex = 0;
-        let x, y;
-        
-        // Find the valid position for this index
-        while (currentIndex <= index) {
-            // Calculate potential position
-            x = startX + col * spacing;
-            y = startY + row * spacing;
-            
-            // Check if this position (including element radius) is within container
-            const isValid = isPointInCircle(x, y, centerX, centerY, containerRadius - elementRadius);
-            
-            if (isValid) {
-                if (currentIndex === index) {
-                    return { x, y };
-                }
-                currentIndex++;
-            }
-            
-            // Move to next position
-            col++;
-            
-            // If we've moved too far right, go to next row
-            if (x + spacing > centerX + containerRadius - elementRadius) {
-                col = 0;
-                row++;
-            }
+    // Function to calculate intersection point of line and circle
+    function getIntersectionPoint(x1, y1, x2, y2, cx, cy, r) {
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const a = dx * dx + dy * dy;
+        const b = 2 * (dx * (x1 - cx) + dy * (y1 - cy));
+        const c = (x1 - cx) * (x1 - cx) + (y1 - cy) * (y1 - cy) - r * r;
+        const det = b * b - 4 * a * c;
+        if (det < 0) return null;
+        const t1 = (-b + Math.sqrt(det)) / (2 * a);
+        const t2 = (-b - Math.sqrt(det)) / (2 * a);
+        // Use the smaller positive t value to get the first intersection
+        const t = (t1 > 0 && t2 > 0) ? Math.min(t1, t2) : Math.max(t1, t2);
+        if (t < 0 || t > 1) return null;  // Intersection is outside the line segment
+        return {
+            x: x1 + t * dx,
+            y: y1 + t * dy
+        };
+    }
+
+    // Function to create a U-shaped curved path
+    function createCurvedPath(startX, startY, endX, endY) {
+        const dx = endX - startX;
+        const dy = endY - startY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const midX = (startX + endX) / 2;
+        const midY = (startY + endY) / 2;
+        const normalX = -dy / distance;
+        const normalY = dx / distance;
+        const curveStrength = distance * 0.1;  // Adjust this value to change the curve's prominence
+        const controlX = midX + normalX * curveStrength;
+        const controlY = midY + normalY * curveStrength;
+        return `M ${startX} ${startY} Q ${controlX} ${controlY}, ${endX} ${endY}`;
+    }
+
+    // Function to update circle and link positions
+    function updatePositions(event) {
+        const svgRect = svg.getBoundingClientRect();
+        const mouseX = event.clientX - svgRect.left;
+        const mouseY = event.clientY - svgRect.top;
+        // Update circle position
+        circle.setAttribute('cx', mouseX);
+        circle.setAttribute('cy', mouseY);
+        // Get circle radius
+        const radius = parseFloat(circle.getAttribute('r'));
+        // Get path start and end points
+        const pathLength = path.getTotalLength();
+        const startPoint = path.getPointAtLength(0);
+        const endPoint = path.getPointAtLength(pathLength);
+        // Calculate intersection points
+        const intersectionStart = getIntersectionPoint(startPoint.x, startPoint.y, mouseX, mouseY, mouseX, mouseY, radius);
+        const intersectionEnd = getIntersectionPoint(endPoint.x, endPoint.y, mouseX, mouseY, mouseX, mouseY, radius);
+        // Update link positions
+        if (intersectionStart) {
+            const d = createCurvedPath(startPoint.x, startPoint.y, intersectionStart.x, intersectionStart.y);
+            curvedLinkToCircle.setAttribute('d', d);
         }
-        
-        // Fallback position at container center if no valid position found
-        return { x: centerX, y: centerY };
-    }
-
-    function addElementToContainer(element) {
-        const elementId = element.attr('id');
-        const elementName = element.attr('label') || elementId;
-
-        if (storedElements.find(el => el.originalId === elementId) || 
-            storedElements.length >= 25) { // Limit to prevent overcrowding
-            return;
-        }
-
-        const position = calculateGridPosition(storedElements.length);
-
-        const g = containerGroup.append('g')
-            .attr('class', 'stored-element')
-            .attr('id', `stored-${elementId}`);
-
-        const circle = g.append('circle')
-            .attr('cx', position.x)
-            .attr('cy', position.y)
-            .attr('r', 12)
-            .attr('fill', 'white')
-            .attr('stroke', '#2196F3')
-            .attr('stroke-width', 1.5)
-            .on('mouseover', function() {
-                d3.select(this)
-                    .attr('stroke-width', 2)
-                    .style('filter', `url(#glow-${locid})`);
-                showTooltip(elementName, position.x, position.y);
-            })
-            .on('mouseout', function() {
-                d3.select(this)
-                    .attr('stroke-width', 1.5)
-                    .style('filter', 'none');
-                hideTooltip();
-            });
-
-        storedElements.push({
-            group: g,
-            originalId: elementId,
-            name: elementName
-        });
-    }
-
-    function showTooltip(text, x, y) {
-        hideTooltip();
-        const tooltip = containerGroup.append('g')
-            .attr('class', 'tooltip')
-            .style('pointer-events', 'none');
-
-        const bg = tooltip.append('rect')
-            .attr('x', x + 20)
-            .attr('y', y - 25)
-            .attr('width', text.length * 8 + 20)
-            .attr('height', 30)
-            .attr('rx', 5)
-            .attr('ry', 5)
-            .attr('fill', 'white')
-            .attr('stroke', '#2196F3')
-            .attr('stroke-width', 1)
-            .style('filter', `url(#glow-${locid})`);
-
-        tooltip.append('text')
-            .attr('x', x + 30)
-            .attr('y', y - 5)
-            .text(text)
-            .attr('fill', '#2196F3')
-            .style('font-size', '12px');
-    }
-
-    function hideTooltip() {
-        containerGroup.selectAll('.tooltip').remove();
-    }
-
-    function removeElementFromContainer(elementId) {
-        const index = storedElements.findIndex(el => el.originalId === elementId);
-        if (index !== -1) {
-            d3.select(`#stored-${elementId}`).remove();
-            storedElements.splice(index, 1);
-            reorganizeElements();
+        if (intersectionEnd) {
+            const d = createCurvedPath(intersectionEnd.x, intersectionEnd.y, endPoint.x, endPoint.y);
+            curvedLinkFromCircle.setAttribute('d', d);
         }
     }
 
-    function reorganizeElements() {
-        storedElements.forEach((stored, index) => {
-            const position = calculateGridPosition(index);
-            stored.group.select('circle')
-                .transition()
-                .duration(300)
-                .attr('cx', position.x)
-                .attr('cy', position.y);
-        });
+    // Remove existing event listener if it exists
+    svg.removeEventListener('mousemove', circle.updatePositionHandler);
+    
+    if (isFollowing) {
+		path.style.opacity = 0.1;
+        // Start following the mouse
+        circle.updatePositionHandler = updatePositions;
+        svg.addEventListener('mousemove', circle.updatePositionHandler);
+        // Show links
+        curvedLinkToCircle.style.display = 'block';
+        curvedLinkFromCircle.style.display = 'block';
+    } else {
+        // When stopping following, update positions one last time to the current mouse position
+        updatePositions(e);
+        // Clear the handler reference
+        delete circle.updatePositionHandler;
+        // Keep links visible
+        curvedLinkToCircle.style.display = 'block';
+        curvedLinkFromCircle.style.display = 'block';
+		//path.style.opacity = 1;
     }
-
-    // Simplified drag behavior
-    containerGroup.call(d3.drag()
-        .on('drag', function() {
-            const dx = d3.event.dx;
-            const dy = d3.event.dy;
-            
-            const transform = containerGroup.attr('transform') || 'translate(0,0)';
-            const currentTranslate = transform.match(/translate\(([-\d.]+),([-\d.]+)\)/) || [0, 0, 0];
-            const newX = parseFloat(currentTranslate[1] || 0) + dx;
-            const newY = parseFloat(currentTranslate[2] || 0) + dy;
-            
-            containerGroup.attr('transform', `translate(${newX},${newY})`);
-        }));
-
-    return () => observer.disconnect();
+    // Optional: Add visual feedback
+    circle.style.fill = isFollowing ? 'red' : 'blue';
 });
 			}
+				
+		  
+		}
+		
+		function clonelclick(){										//handle clone left click events such as hide trail elements
+			var dates = $('[id^="trail'+nameid+'"]');
+			if(this.getAttribute('clicked')=="false"){	
+			for(var i=0;i<dates.length;i++){
+			dates[i].style.visibility = "hidden";
+			this.setAttribute('clicked',"true");
+			}}
+			else{
+			for(var i=0;i<dates.length;i++){
+			dates[i].style.visibility = "visible";								//hide trail eelments
+			this.setAttribute('clicked',"false");}
+			}
+		}
+	
+		function trailclonehover(){									//handle trail elements hover
+					
+			let $event = event;
+            let ele = $event.target;      
+			let label = event.target.getAttribute('label');
+			
+			domRect = ele.getBoundingClientRect();
+			let x1Loc = domRect.x-document.getElementById('leftplace').offsetWidth+5;
+			let y1Loc = domRect.y+5;
+					
+			clearTimeout(timeout);															//display the line connection name when hovering
+			tooltip
+			.style("left", x1Loc + "px")
+            .style("top", y1Loc + "px")
+            .style("display", "inline-block")
+            .html(label);
+			
+		}
+	
+		function trailcloneout(){								// handle trail elements hover out
+					timeout = setTimeout(function(d){tooltip.style("display", "none");},1000)
+		}
+
+		function isPointOnPath(x, y, path) {
+		  const pathLength = path.getTotalLength();
+		  const precision = 8; // Adjust this for more or less precision
+		  
+		  for (let i = 0; i <= pathLength; i += precision) {
+			const p = path.getPointAtLength(i);
+			const d = Math.sqrt((p.x - x) ** 2 + (p.y - y) ** 2);
+			if (d < precision) return true;
+		  }
+		  
+		  return false;
+		}
+
+		// Function to detect which path the circle is on
+		function detectPath(circle) {
+		  const x = parseFloat(circle.getAttribute('cx'));
+		  const y = parseFloat(circle.getAttribute('cy'));
+		  const paths = document.querySelectorAll('path');
+		  
+		  for (let path of paths) {
+			if (isPointOnPath(x, y, path)) {
+			  return path.id;
+			}
+		  }
+		  
+		  return null; // Circle is not on any path
+		}
+
+		// Function to update circle position and check path
+		function updateCircleAndDetectPath() {
+		  const circle = document.getElementById('clone'+nameid);
+		  
+		  // Update circle position (you need to implement this part)
+		  // For example: circle.setAttribute('cx', newX);
+		  //              circle.setAttribute('cy', newY);
+		  
+		  const currentPath = detectPath(circle);
+		  if (currentPath) {
+			//console.log(`Circle is on path: ${currentPath}`);
+		  } else {
+			//console.log('Circle is not on any path');
+		  }
+		  return currentPath;
+		}
+
+		
+	})
+	
+	
+			document.querySelector(`.svg-menu-item3-${locid}`).addEventListener('click', function(e) {		//handle create or delete clone event from element on map (not funcional for this version)
+			
+			document.querySelector('.svg-custom-menu').style.display = 'none';
+
+			let boardg = d3.select('#line-canvas');
+
+			if (cloned == 'false'){
+			let targetCircle = boardg.append("circle")
+                                .attr("r", 25) 	
+                                .attr("cx", x1Loc)
+                                .attr("cy", y1Loc)
+								.attr("id",function(d,i){return 'clone'+nameid;})
+                                .style("fill", "white")
+                                .style("stroke", "blue")
+                                .style("stroke-width", "2px")
+								.attr('trail',false)
+								.call(d3.drag()
+								.on("drag", draggedv));
+
+								
+			circele.setAttribute('cloned','true');	
+			
+			 
+			let tcirc = document.getElementById('clone'+nameid);
+			let x1Loct = parseFloat(tcirc.getAttribute("cx"));
+			let y1Loct = parseFloat(tcirc.getAttribute("cy"));
+			
+			if(document.querySelector('.right .all-data-box').style.display == 'block')												///connect to graph
+			{			
+			for(var j = 0; j<persons.split(',').length;j++)
+			{
+			person = persons.split(',')[j];
+			let tar = document.querySelector('[personsid="' + person + '"]')
+			domRect = tar.getBoundingClientRect();
+			let x2Loc = domRect.x-document.getElementById('leftplace').offsetWidth+5;
+			let y2Loc = domRect.y+5;
+			
+			ClusterGMCloneToGraph.push({
+                    source : {
+                      id: "clusterGM",
+					  ele:nameid,
+                      xOffset : x1Loct,
+                      yOffset : y1Loct
+                    },
+                    target : {
+                      id: "graph",
+                      xOffset : x2Loc,
+                      yOffset : y2Loc
+                    }
+                  });
+		
+			connections4cgclone.push({ source: tcirc, target: tar, boxElement: 'all-data-box' });
+			}}
+
+
+			if(document.querySelector('.right .bubblemap-box').style.display == 'block')											//connect to map
+			{			
+			for(var j = 0; j<locs.split(',').length;j++)
+			{
+			loc = locs.split(',')[j];
+			let tar = document.querySelector('[map-id="map' + loc + '"]');
+
+			domRect2 = tar.getBoundingClientRect();
+			let x2Loc = domRect2.x-document.getElementById('leftplace').offsetWidth+5;
+			let y2Loc = domRect2.y+5;	
+
+			
+			ClusterGMCloneToGraph.push({
+                    source : {
+                      id: "clusterGM",
+					  ele:nameid,
+                      xOffset : x1Loct,
+                      yOffset : y1Loct
+                    },
+                    target : {
+                      id: "graph",
+                      xOffset : x2Loc,
+                      yOffset : y2Loc
+                    }
+                  });
+		
+			connections4cgclone.push({ source: tcirc, target: tar, boxElement: 'all-data-box' });
+			}}			
+
+				drawPolyLineClusterGM(ClusterGMCloneToGraph);
+
+
+			
+			function draggedv(d){				
+				d3.select(this).attr("cx", d3.event.x).attr("cy", d3.event.y);
+				reDrawLines();
+			}
+				
+			}
+			else
+			{
+				let el = document.getElementById('clone'+nameid);
+				el.remove(); 
+				ClusterGMCloneToGraph=[],connections4cgclone=[]
+			document.querySelectorAll('.link-newcgmclone').forEach(ele => {
+				  ele.remove();
+			  });
+			
+				circele.setAttribute('cloned','false');	
+			}
+			
+			})
+
+			
+			document.querySelector(`.svg-menu-item4-${locid}`).addEventListener('click', function(e) {
+				
+			document.querySelector('.svg-custom-menu').style.display = 'none';	
+			var x = document.getElementsByClassName("link-newbg "+nameid);
+			var z = document.getElementsByClassName("link-newbo "+nameid);
+			
+			let animationRunning = true; // Flag to control the animation loop
+			let animationRunningo = true; // Flag to control the animation loop
+
+			let boardg = d3.select('#line-canvas');
+			
+			for(var i=0;i<x.length;i++)											// handle dragging clone element on the link to graph view
+			{
+			let pid = x[i].getAttribute('id').slice(3);		
+			let progress = 1; // Progress along the path, from 0 to 1
+			let speed = 0.005; // Speed of the animation			
+			let path = x[i];
+
+			tar = x[i].getAttribute('tar');
+			
+			var elelabel = document.getElementById('map'+nameid).getAttribute('label');
+			var tarlabel = document.getElementById(tar).getAttribute('data-name');			
+
+			let calltar = document.getElementById(tar);
+			domRect = calltar.getBoundingClientRect();
+			let x1Locall = domRect.x-document.getElementById('leftplace').offsetWidth+5;
+			let y1Locall = domRect.y+5;			
+			let dist = parseInt(x[i].getTotalLength()*0.5)
+				//console.log(dist)
+			let chp = x[i].getPointAtLength(dist);
+			
+						boardg.append("circle")
+                                .attr("r", 15) 															//create a clone for the element
+                                .attr("cx", chp['x'])
+                                .attr("cy", chp['y'])
+								.attr("id",function(d,i){return 'calltar'+pid;})
+								.attr("class",'clones')
+                                .style("fill", "white")
+                                .style("stroke", "green")
+                                .style("stroke-width", "2px")
+								.style("opacity", 0.6)
+								.style("position","fixed")
+								.attr("label", elelabel+"---"+tarlabel)
+								.attr("path", path)
+								.on("mouseup", trailoverclick)
+								.on("mouseover", function(d){tooltip3.text(event.target.getAttribute('label'));return tooltip3.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip3.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})				//handle mouse click, hover elements
+								.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})	
+			
+			
+	
+			function animate() {
+				
+			let circle = document.getElementById('calltar'+pid);			
+
+				// Get the point at the current progress along the path
+			if (!animationRunning) {
+				return; // Stop the animation loop
+				}				
+				const point = path.getPointAtLength(progress * path.getTotalLength());
+
+				// Update the circle's position
+				circle.setAttribute('cx', point.x);
+				circle.setAttribute('cy', point.y);
+
+				// Update the progress and reset if it completes the path
+				progress -= speed;
+				if (progress <= 0) progress = 1;
+				
+				console.log(progress);
+				requestAnimationFrame(animate);
+			}
+
+			animate();		
+
+setTimeout(() => {
+    animationRunning = false; // Pause the animation after 5 seconds
+
+    setTimeout(() => {
+        animationRunning = true; // Resume the animation after a 3-second pause
+        animate(); // Call animate() again to resume the animation
+
+        setTimeout(() => {
+            animationRunning = false; // Pause the animation again after it has run for 5 seconds
+
+            setTimeout(() => {
+                animationRunning = true; // Resume the animation after a 10-second pause
+                animate(); // Optionally call animate() again to resume the animation, depending on your setup
+            }, 30000); // 10-second pause
+
+        }, 3500); // Duration of animation before the second pause
+
+    }, 3000); // 3-second pause
+
+}, 1200); // Time until first pause
+			}
+			for(var i=0;i<z.length;i++)											// handle dragging clone element on the link to graph view
+			{
+			let pid = z[i].getAttribute('id').slice(3);		
+			let progress2 = 1; // Progress along the path, from 0 to 1
+			let speed2 = 0.005; // Speed of the animation			
+			var elelabel = document.getElementById('map'+nameid).getAttribute('label');
+			var tarlabel = document.getElementById(tar).getAttribute('orgname');	
+			tar = z[i].getAttribute('tar');
+			let path = z[i];	
+
+			let calltar = document.getElementById(tar);
+			domRect = calltar.getBoundingClientRect();
+			let x1Locall = domRect.x-document.getElementById('leftplace').offsetWidth+5;
+			let y1Locall = domRect.y+5;			
+			let dist = parseInt(z[i].getTotalLength()*0)
+				//console.log(dist)
+			let chp = z[i].getPointAtLength(dist);
+			
+						boardg.append("rect")
+                                .attr("width", 40)
+								.attr("height",25)
+								.attr("id",function(d,i){return 'calltaron'+pid;})
+                                .attr("x", chp['x'])
+                                .attr("y", chp['y'])
+								.style("fill", "white")
+                                .style("stroke", "blue")
+                                .style("stroke-width", "2px")
+								.style("opacity", 0.6)
+								.style("position","fixed")
+								.on("mouseup",trailoverclick)								
+								.attr("label", elelabel+"---"+tarlabel)
+								.attr("path", z[i])
+								.on("mouseover", function(d){tooltip3.text(event.target.getAttribute('label'));return tooltip3.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip3.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+								.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})	;
+						
+			let circle = document.getElementById('calltaron'+pid);			
+			
+			function animate2() {
+				// Get the point at the current progress along the path
+			if (!animationRunningo) {
+				return; // Stop the animation loop
+				}				
+				let point = path.getPointAtLength(progress2 * path.getTotalLength());
+
+				// Update the circle's position
+				circle.setAttribute('x', point.x);
+				circle.setAttribute('y', point.y);
+
+				// Update the progress and reset if it completes the path
+				progress2 -= speed2;
+				if (progress2 <= 0) progress2 = 1;
+
+				requestAnimationFrame(animate2);
+			}
+
+			animate2();		
+
+setTimeout(() => {
+    animationRunningo = false; // Pause the animation after 5 seconds
+
+    setTimeout(() => {
+        animationRunningo = true; // Resume the animation after a 3-second pause
+        animate2(); // Call animate() again to resume the animation
+
+        setTimeout(() => {
+            animationRunningo = false; // Pause the animation again after it has run for 5 seconds
+
+            setTimeout(() => {
+                animationRunningo = true; // Resume the animation after a 10-second pause
+                animate2(); // Optionally call animate() again to resume the animation, depending on your setup
+            }, 30000); // 10-second pause
+
+        }, 3500); // Duration of animation before the second pause
+
+    }, 3000); // 3-second pause
+
+}, 1200); // Time until first pause
+
+			}
+			
+		function trailoverclick(){									//handle trail elements hover
+				let progress3 = 0.60; // Progress along the path, from 0 to 1
+			let speed3 = 0.005; // Speed of the animation						
+			let $event = event;
+            let ele = $event.target;      
+			let path = document.getElementById('lbg1');
+
+			let circle = ele;
+			let animationRunningt = true;
+			function animate3() {
+				// Get the point at the current progress along the path
+			if (!animationRunningt) {
+				return; // Stop the animation loop
+				}				
+				let point = path.getPointAtLength(progress3 * path.getTotalLength());
+				// Update the circle's position
+				circle.setAttribute('cx', point.x);
+				circle.setAttribute('cy', point.y);
+
+				// Update the progress and reset if it completes the path
+				progress3 += speed3;
+				console.log(progress3);
+				if (progress3 >= 1) progress3 = 0;
+
+				requestAnimationFrame(animate3);
+			}
+
+			animate3();	
+		setTimeout(() => {
+			animationRunningt = false;
+    }, 1460); 			
+		}		
+				
+			
+			})
+			
+			
+		}
 		else{															//store the answer when clicked on submit answer
 			const rightCustomMenu = document.querySelector('.svg-custom-menu');
 			rightCustomMenu.innerHTML = `<li class="svg-menu-item-${locid} svg-menu-item">Submit as Answer</li>`
